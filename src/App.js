@@ -1,11 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/shared/Navbar/Navbar';
+import Banner from './components/Banner/Banner';
+import Languages from './components/Languages/Languages';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
-    <div className="container">
-      <h1><i className="fa-solid fa-droplet"></i></h1>
-    </div>
+    <>
+      <Banner/>
+      <Languages/>
+      <Navbar/>
+      <Home/>
+    </>
   );
 }
 

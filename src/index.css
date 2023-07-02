@@ -1,13 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@100;200;300;400;500;600;700;800;900&display=swap");
+:root {
+  --btn-color: #e07e1b;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI",
+    "Helvetica Neue", "Arial", "sans-serif";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Banner */
+
+.banner{
+  background-color:#FF9900;
+  width: 100%;
+}
+
+.lang{
+  background-color: #F1F1F2;
+  width: 100%;
+}
+
+/* Nav */
+
+
+/* .navbar{
+  height: 65px;
+} */
+
+.sign-in-btn {
+  background-color: var(--btn-color);
+}
+
+.btn:not(.search-btn):hover {
+  background-color: var(--btn-color) !important;
+}
+
+.acc-drop:hover,
+.help:hover,
+.cart:hover {
+  color: var(--btn-color) !important;
+}
+.logo {
+  max-width: 200px;
+  height: 70px;
+}
+
+.search-btn {
+  background-color: var(--btn-color);
+  box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, 0.125);
+}
+
+.search-btn:hover{
+  background-color: #f07102;
+}
+
+.fa-question {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+input.form-control:focus {
+  box-shadow: none !important
+}
+/* input.form-control{
+  width: 400px;
+} */
+
+.sell{
+  text-decoration: none;
+  color: #FF0000;
+}
+
+.sell:hover{
+  text-decoration: underline;
+  
+}
+
+
+/* Home */
+
+.main{
+min-height: 100vh;
+background:center 0 no-repeat url('./assets//imgs//new.jpg') #FE9900;
+/* min-width: 1200px; */
+;}
+
+.cate-home:hover{
+  color: #FF9900;
+  cursor: pointer;
+}
+
+
+.keep-img:hover{
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.125);
+  /* border: 1px solid rgba(0, 0, 0, 0.125); */
+scale: 1.01;
+}
+
+.prev-price{
+  text-decoration: line-through;
+}
+
+.eximg{
+  width: 170px;
+  height: 193px;
+}
+
+.eximg:hover{
+  scale: 1.01;
 }
