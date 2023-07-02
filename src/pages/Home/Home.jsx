@@ -40,6 +40,8 @@ import eximg5 from "../../assets/imgs/extra/5.png"
 import eximg6 from "../../assets/imgs/extra/6.png"
 import Slider from "react-slick";
 import Footer from '../../components/shared/Footer/Footer'
+import Declaration from '../../components/shared/Declaration/Declaration'
+import BackToUpBtn from '../../components/BackToUpBtn/BackToUpBtn'
 export default function Home() {
     const catSlider = {
         dots: false,
@@ -190,7 +192,8 @@ export default function Home() {
                     <div><img className='eximg my-1' src={eximg6} alt="" /></div>
                 </div>
         </div>
-        
+            <BackToUpBtn/>
+            <Declaration/>
             <Footer/>
         
     </div>
