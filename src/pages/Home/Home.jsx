@@ -209,7 +209,7 @@ export default function Home() {
         </div>
 
         {/* Extra Discounds */}
-        <div className="container rounded-1 my-3 pb-2 bg-white">
+        <div className="container rounded-1 my-3 pb-2 bg-white d-none d-md-block d-lg-block d-xl-block">
                 <h4 className='text-center p-3' style={{ backgroundColor: "#E2F5FF" }}>EXTRA DISCOUNTS FOR YOU</h4>
                 <div className=" d-flex flex-row justify-content-around align-items-center">
                     <div><img className='eximg my-1' src={eximg1} alt="" /></div>
@@ -221,7 +221,7 @@ export default function Home() {
                 </div>
         </div>
         <FlashSalCountDown/>
-        <div className="container rounded-1 my-3 pb-2 bg-white">
+        <div className="container rounded-1 my-3 pb-2 bg-white d-none d-md-block d-lg-block d-xl-block">
                 <h4 className='text-center p-3' style={{ backgroundColor: "#F7C1B2" }}>All Your Eid Groceries in One Place</h4>
                 <div className=" d-flex flex-row justify-content-around align-items-center">
                     <div><img className='eximg my-1' src={eximg1} alt="" /></div>
