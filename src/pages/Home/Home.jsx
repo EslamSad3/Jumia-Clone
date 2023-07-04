@@ -42,6 +42,7 @@ import Slider from "react-slick";
 import Footer from '../../components/shared/Footer/Footer'
 import Declaration from '../../components/shared/Declaration/Declaration'
 import BackToUpBtn from '../../components/BackToUpBtn/BackToUpBtn'
+import FlashSalCountDown from '../../components/FlashSalCountDown/FlashSalCountDown'
 export default function Home() {
     const catSlider = {
         dots: false,
@@ -50,6 +51,32 @@ export default function Home() {
         speed: 500,
         slidesToShow: 8,
         slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
     }
     const sliderSettings = {
         dots: true,
@@ -87,7 +114,8 @@ export default function Home() {
         ]
     };
 
-    return <div className='container-fluid main'>
+    return <>
+        <div className='container-fluid main'>
         <div className="container d-none d-md-block d-lg-block d-xl-block">
             <div className="row pt-3">
 
@@ -181,8 +209,8 @@ export default function Home() {
         </div>
 
         {/* Extra Discounds */}
-        <div className="container rounded-1 bg-white">
-                <h4 className='text-center my-3 p-2 w-100' style={{ backgroundColor: "#E2F5FF" }}>EXTRA DISCOUNTS FOR YOU</h4>
+        <div className="container rounded-1 my-3 pb-2 bg-white">
+                <h4 className='text-center p-3' style={{ backgroundColor: "#E2F5FF" }}>EXTRA DISCOUNTS FOR YOU</h4>
                 <div className=" d-flex flex-row justify-content-around align-items-center">
                     <div><img className='eximg my-1' src={eximg1} alt="" /></div>
                     <div><img className='eximg my-1' src={eximg2} alt="" /></div>
@@ -192,9 +220,23 @@ export default function Home() {
                     <div><img className='eximg my-1' src={eximg6} alt="" /></div>
                 </div>
         </div>
+        <FlashSalCountDown/>
+        <div className="container rounded-1 my-3 pb-2 bg-white">
+                <h4 className='text-center p-3' style={{ backgroundColor: "#F7C1B2" }}>All Your Eid Groceries in One Place</h4>
+                <div className=" d-flex flex-row justify-content-around align-items-center">
+                    <div><img className='eximg my-1' src={eximg1} alt="" /></div>
+                    <div><img className='eximg my-1' src={eximg2} alt="" /></div>
+                    <div><img className='eximg my-1' src={eximg3} alt="" /></div>
+                    <div><img className='eximg my-1' src={eximg4} alt="" /></div>
+                    <div><img className='eximg my-1' src={eximg5} alt="" /></div>
+                    <div><img className='eximg my-1' src={eximg6} alt="" /></div>
+                </div>
+        </div>
+        <FlashSalCountDown/>
             <BackToUpBtn/>
             <Declaration/>
-            <Footer/>
-        
     </div>
+
+        <Footer/>
+    </>
 }

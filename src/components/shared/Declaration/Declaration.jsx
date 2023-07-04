@@ -86,6 +86,7 @@ export default function Declaration() {
             <div>
                 <h2 className="h2 p-2" style={{ fontSize: "1.5rem" }}><strong>What are the <a href="http://www.jumia.com.eg/sp-how-to-pay/">payment methods</a> available on Jumia?</strong></h2>
                 <p className="p-2 " style={{ fontSize: "0.8rem" }}>Cash on delivery, Mastercard, Visa &amp; Fawry.</p>
+                
             </div>
         </div>
     );
