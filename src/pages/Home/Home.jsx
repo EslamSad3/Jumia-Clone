@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "./Home.module.css"
 import flash from "../../assets/imgs/flash-sale.png"
 import eid from "../../assets/imgs/Eid-offers.png"
@@ -43,7 +43,16 @@ import Footer from '../../components/shared/Footer/Footer'
 import Declaration from '../../components/shared/Declaration/Declaration'
 import BackToUpBtn from '../../components/BackToUpBtn/BackToUpBtn'
 import FlashSalCountDown from '../../components/FlashSalCountDown/FlashSalCountDown'
+import axios from 'axios'
 export default function Home() {
+
+    const [cat,setCat] = useState([])
+    useEffect(()=>{
+        axios.get("http://localhost:8000/api/team2/categories").then(res=>{
+            // console.log(res.data.data);
+            setCat(res.data.data)
+        })
+    },[])
     const catSlider = {
         dots: false,
         arrows: true,
@@ -152,7 +161,7 @@ export default function Home() {
             </div>
         </div>
         <div className="container mt-4 bg-white rounded mb-3">
-            <Slider {...catSlider} >
+            {/* <Slider {...catSlider} >
                 <div>
                     <img src={slid1} alt="" className='w-100 h-100 m-2 px-1' />
                 </div>
@@ -189,6 +198,18 @@ export default function Home() {
                 <div>
                     <img src={slid12} alt="" className='w-100 h-100 m-2 px-1' />
                 </div>
+            </Slider> */}
+
+            <Slider {...catSlider}>
+                { cat.map((item,index)=>{
+                    return (
+                        <div key={index}>
+                            <img src={item.image} alt=""  className='w-100 h-100 m-2 px-1' />
+                        </div>
+                    )
+                })
+
+                }
             </Slider>
         </div>
         <div className='container bg-white'>
