@@ -31,7 +31,7 @@ function Cart() {
             {/* <img src={imgs[0]} className=' bg-white imgcard' /> */}
             <h3 className='bg-white py-2'>cart</h3>
             <p className='bg-white py-2'>Browse our categories and discover our best deals!</p>
-            <button  className='btn buttonSTART p-3 my-3'> START </button>
+            <button  className='btn buttonSTART p-2 my-3'> START </button>
   </td>  
 
 </table> 
