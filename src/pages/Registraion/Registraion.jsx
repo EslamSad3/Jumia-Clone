@@ -1,7 +1,331 @@
-import React from 'react'
-import style from "./Registraion.module.css"
-export default function Registraion() {
-    return <>
-        <h2>Registraion</h2>
-    </>
+import React, { useState, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import "./Registraion.css"
+import logotop from "../../assets/imgs/validation/myjumia-top-logo.png";
+import logobottom from "../../assets/imgs/validation/myjumia-bottom-logo.png";
+import { MDBContainer, MDBInput, MDBBtn } from "mdb-react-ui-kit";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters long")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+    ),
+  confirmPassword: Yup.string()
+    .required("Both passwords must match")
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
+});
+
+const ShowPasswordButton = ({ showPassword, onClick }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    style={{
+      color: "#757575",
+      fontSize: "19px",
+      position: "absolute",
+      right: "10px",
+      top: "calc(50% - 23px)",
+      backgroundColor: "transparent",
+      border: "none",
+      cursor: "pointer",
+    }}
+  >
+    {showPassword ? (
+      <i className="fas fa-eye-slash"></i>
+    ) : (
+      <i className="fas fa-eye"></i>
+    )}
+  </button>
+);
+
+const FormHeader = () => (
+  <div className="text-center">
+    <img
+      src={logotop}
+      className="mt-1 mb-3 pb-1"
+      style={{ width: "64px" }}
+      alt="logo"
+    />
+    <h4
+      className="mt-1 mb-1 pb-1 fw-bold"
+      style={{
+        color: "#4a4a4a",
+        fontSize: "20px",
+        fontWeight: "500",
+      }}
+    >
+      Create your account
+    </h4>
+    <p
+      className="mt-1 mb-3 pb-1"
+      style={{
+        fontSize: "14px",
+        fontWeight: "400",
+        lineHeight: "1.5em",
+        margin: "8px 0 16px",
+      }}
+    >
+      Let's get started by creating your account.
+      <br />
+      To keep your account safe, we need a strong password.
+    </p>
+  </div>
+);
+
+const EmailInput = ({ touched, errors }) => (
+  <div
+    className="input-group mb-5"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      height: "72px", // Fixed height
+    }}
+  >
+    <Field name="email">
+      {({ field }) => (
+        <MDBInput
+          wrapperClass="mb-1"
+          label="Email address"
+          labelClass="mt-1"
+          id="form1"
+          type="email"
+          size="lg"
+          style={{ height: "56px", boxSizing: "border-box" }}
+          className={errors.password && touched.password ? "is-invalid" : ""}
+          {...field}
+        />
+      )}
+    </Field>
+    <ErrorMessage name="email">
+      {(msg) => (
+        <div
+          className="text-danger text-center"
+          style={{
+            fontSize: "12px",
+            fontWeight: "400",
+            letterSpacing: "0.4px",
+          }}
+        >
+          {msg}
+        </div>
+      )}
+    </ErrorMessage>
+  </div>
+);
+
+const PasswordInput = ({ values, errors, touched }) => {
+  const [passwordStrength, setPasswordStrength] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  useEffect(() => {
+    if (values.password.length === 0) {
+      setPasswordStrength(null);
+      return;
+    }
+
+    const hasLowerCase = /[a-z]/.test(values.password);
+    const hasUpperCase = /[A-Z]/.test(values.password);
+    const hasNumber = /\d/.test(values.password);
+    const hasSpecialChar = /[@$!%*?&]/.test(values.password);
+
+    const strength =
+      (hasLowerCase ? 1 : 0) +
+      (hasUpperCase ? 1 : 0) +
+      (hasNumber ? 1 : 0) +
+      (hasSpecialChar ? 1 : 0);
+
+    if (strength <= 2) {
+      setPasswordStrength("weak");
+    } else if (strength === 3) {
+      setPasswordStrength("good");
+    } else {
+      setPasswordStrength("strong");
+    }
+  }, [values.password]);
+
+  return (
+    <div
+      className="input-group mb-5"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "72px",
+      }}
+    >
+      <Field name="password">
+        {({ field }) => (
+          <>
+            <MDBInput
+              label="Password*"
+              labelClass="mt-1"
+              id="form2"
+              // type="password"
+              type={showPassword ? "text" : "password"}
+              size="lg"
+              style={{ height: "56px", boxSizing: "border-box" }}
+              {...field}
+              className={
+                errors.password && touched.password ? "is-invalid" : ""
+              }
+            />
+            <ShowPasswordButton
+              showPassword={showPassword}
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </>
+        )}
+      </Field>
+      {passwordStrength && (
+        <div className={`strength-bar ${passwordStrength} mb-1 mt-2`}>
+          <div className="bar weak"></div>
+          <div className="bar good"></div>
+          <div className="bar strong"></div>
+        </div>
+      )}
+      <ErrorMessage name="password">
+        {(msg) => (
+          <div
+            className="text-danger text-center mt-1"
+            style={{
+              fontSize: "12px",
+              fontWeight: "400",
+              letterSpacing: "0.4px",
+            }}
+          >
+            {msg}
+          </div>
+        )}
+      </ErrorMessage>
+    </div>
+  );
+};
+
+const ConfirmPasswordInput = ({ errors, touched }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  return (
+    <div
+      className="input-group mb-5"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "72px",
+      }}
+    >
+      <Field name="confirmPassword">
+        {({ field }) => (
+          <>
+            {" "}
+            <MDBInput
+              wrapperClass="mb-1"
+              label="Confirm Password*"
+              labelClass="mt-1"
+              id="form3"
+              type={showPassword ? "text" : "password"}
+              size="lg"
+              style={{ height: "56px", boxSizing: "border-box" }}
+              {...field}
+              className={
+                errors.confirmPassword && touched.confirmPassword
+                  ? "is-invalid"
+                  : ""
+              }
+            />
+            <ShowPasswordButton
+              showPassword={showPassword}
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </>
+        )}
+      </Field>
+      <ErrorMessage name="confirmPassword">
+        {(msg) => (
+          <div
+            className="text-danger text-center"
+            style={{
+              fontSize: "12px",
+              fontWeight: "400",
+              letterSpacing: "0.4px",
+            }}
+          >
+            {msg}
+          </div>
+        )}
+      </ErrorMessage>
+    </div>
+  );
+};
+
+const ContinueButton = () => (
+  <MDBBtn
+    className="mb-1 w-100 fw-bolder"
+    style={{ backgroundColor: "#f8972d" }}
+    size="lg"
+  >
+    Continue
+  </MDBBtn>
+);
+
+const FormFooter = () => (
+  <div
+    className="text-center mt-5"
+    style={{
+      fontSize: "14px",
+      lineHeight: "24px",
+      padding: "0 24px",
+      position: "relative",
+      textAlign: "center",
+    }}
+  >
+    <p>
+      For further support, you may visit the Help Center or contact our customer
+      service team.
+    </p>
+    <img
+      src={logobottom}
+      className="mt-3"
+      style={{ width: "100px" }}
+      alt="logo"
+    />
+  </div>
+);
+
+function Registration() {
+  return (
+    <MDBContainer
+      className="p-3 my-5 d-flex flex-column"
+      style={{ width: "432px" }}
+    >
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          confirmPassword: "",
+        }}
+        validationSchema={validationSchema}
+        onSubmit={(values, actions) => {
+          alert(JSON.stringify(values, null, 2));
+          actions.setSubmitting(false);
+        }}
+      >
+        {({ errors, touched, values }) => (
+          <Form>
+            <FormHeader />
+            <EmailInput errors={errors} touched={touched} />
+            <PasswordInput values={values} errors={errors} touched={touched} />
+            <ConfirmPasswordInput errors={errors} touched={touched} />
+            <ContinueButton />
+            <FormFooter />
+          </Form>
+        )}
+      </Formik>
+    </MDBContainer>
+  );
 }
+
+export default Registration;

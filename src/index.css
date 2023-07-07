@@ -68,9 +68,9 @@ body {
 input.form-control:focus {
   box-shadow: none !important
 }
-/* input.form-control{
+input.form-control{
   width: 400px;
-} */
+}
 
 .inpmail:focus{
   border: 1px solid var(--btn-color);
