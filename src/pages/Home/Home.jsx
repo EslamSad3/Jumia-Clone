@@ -45,6 +45,14 @@ import BackToUpBtn from '../../components/BackToUpBtn/BackToUpBtn'
 import FlashSalCountDown from '../../components/FlashSalCountDown/FlashSalCountDown'
 import { Link } from 'react-router-dom'
 export default function Home() {
+
+    const [cat, setCat] = useState([])
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/team2/categories").then(res => {
+            // console.log(res.data.data);
+            setCat(res.data.data)
+        })
+    }, [])
     const catSlider = {
         dots: false,
         arrows: true,
@@ -117,43 +125,43 @@ export default function Home() {
 
     return <>
         <div className='container-fluid main'>
-        <div className="container d-none d-md-block d-lg-block d-xl-block">
-            <div className="row pt-3">
+            <div className="container d-none d-md-block d-lg-block d-xl-block">
+                <div className="row pt-3">
 
-                <div className="col-sm-12 col-md-12 col-lg-2 bg-light categories border border-1 rounded d-flex flex-column justify-content-start " >
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-laptop me-2"></i> <Link to="/copmuting"> Copmuters</Link> </span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}>  <i class="fa-solid fa-apple-whole me-2"></i> Supermarket</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-shirt me-2"></i> Fasion</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-staff-snake me-2"></i> Health & Beauty</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-baby me-2"></i> Baby Products</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-mobile-screen-button me-2"></i> Phone & Tablets</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-house me-2"></i> Home & Furniture</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-mug-hot me-2"></i> Appliances</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-display me-2"></i>Electronics</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-dumbbell me-2"></i>Sporting Goods</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-gamepad me-2"></i>Gamming</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-ellipsis me-2"></i> Other Categories</span>
-                </div>
-                <div className=" col-sm-12 col-md-12 col-lg-8">
-                    <Slider {...sliderSettings}>
-                        <div> <img src={img1} alt="" /> </div>
-                        <div> <img src={img2} alt="" /> </div>
-                        <div> <img src={img3} alt="" /> </div>
-                        <div> <img src={img4} alt="" /> </div>
-                        <div> <img src={img5} alt="" /> </div>
-                        <div> <img src={img6} alt="" /> </div>
-                        <div> <img src={img7} alt="" /> </div>
-                        <div> <img src={img8} alt="" /> </div>
-                    </Slider>
-                </div>
-                <div className=" col-sm-2 col-md-2 col-lg-1 ">
-                    <img src={flash} alt="flash" />
-                    <img src={eid} alt="eid" />
+                    <div className="col-sm-12 col-md-12 col-lg-2 bg-light categories border border-1 rounded d-flex flex-column justify-content-start " >
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-laptop me-2"></i> <Link to="/copmuting"> Copmuters</Link> </span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}>  <i class="fa-solid fa-apple-whole me-2"></i> Supermarket</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-shirt me-2"></i> Fasion</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-staff-snake me-2"></i> Health & Beauty</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-baby me-2"></i> Baby Products</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-mobile-screen-button me-2"></i> Phone & Tablets</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-house me-2"></i> Home & Furniture</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-mug-hot me-2"></i> Appliances</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-display me-2"></i>Electronics</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-dumbbell me-2"></i>Sporting Goods</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-gamepad me-2"></i>Gamming</span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-ellipsis me-2"></i> Other Categories</span>
+                    </div>
+                    <div className=" col-sm-12 col-md-12 col-lg-8">
+                        <Slider {...sliderSettings}>
+                            <div> <img src={img1} alt="" /> </div>
+                            <div> <img src={img2} alt="" /> </div>
+                            <div> <img src={img3} alt="" /> </div>
+                            <div> <img src={img4} alt="" /> </div>
+                            <div> <img src={img5} alt="" /> </div>
+                            <div> <img src={img6} alt="" /> </div>
+                            <div> <img src={img7} alt="" /> </div>
+                            <div> <img src={img8} alt="" /> </div>
+                        </Slider>
+                    </div>
+                    <div className=" col-sm-2 col-md-2 col-lg-1 ">
+                        <img src={flash} alt="flash" />
+                        <img src={eid} alt="eid" />
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className="container mt-4 bg-white rounded mb-3">
-            <Slider {...catSlider} >
+            <div className="container mt-4 bg-white rounded mb-3">
+                {/* <Slider {...catSlider} >
                 <div>
                     <img src={slid1} alt="" className='w-100 h-100 m-2 px-1' />
                 </div>
@@ -190,27 +198,39 @@ export default function Home() {
                 <div>
                     <img src={slid12} alt="" className='w-100 h-100 m-2 px-1' />
                 </div>
-            </Slider>
-        </div>
-        <div className='container bg-white'>
-            <div className="text d-flex justify-content-between align-items-center">
-                <p className='h5 m-2'>Keep Shopping For</p>
-                <a href="#" className='sell m-2'> SEE ALL <i className='fa fa-arrow-right'></i></a>
+            </Slider> */}
+
+                <Slider {...catSlider}>
+                    {
+                        cat.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <img src={item.image} alt='' className='w-100 h-100 m-2 px-1' />
+                                </div>
+                            )
+                        })
+                    }
+                </Slider>
             </div>
-            <a >
-                {/* <div className="card border border-0">
+            <div className='container bg-white'>
+                <div className="text d-flex justify-content-between align-items-center">
+                    <p className='h5 m-2'>Keep Shopping For</p>
+                    <a href="#" className='sell m-2'> SEE ALL <i className='fa fa-arrow-right'></i></a>
+                </div>
+                <a >
+                    {/* <div className="card border border-0">
                     <img className=' card-img-top keep-img' src={keep} alt="Title"  style={{ width: "150px", height: "150px" }} />
                     <div className="card-body">
                     <div class="price h5">EGP 73.20</div>
                         <small className="prev-price">EGP 150.00</small>
                     </div>
                 </div> */}
-                <img className='keep-img' src={keep2} alt="" />
-            </a>
-        </div>
+                    <img className='keep-img' src={keep2} alt="" />
+                </a>
+            </div>
 
-        {/* Extra Discounds */}
-        <div className="container rounded-1 my-3 pb-2 bg-white d-none d-md-block d-lg-block d-xl-block">
+            {/* Extra Discounds */}
+            <div className="container rounded-1 my-3 pb-2 bg-white d-none d-md-block d-lg-block d-xl-block">
                 <h4 className='text-center p-3' style={{ backgroundColor: "#E2F5FF" }}>EXTRA DISCOUNTS FOR YOU</h4>
                 <div className=" d-flex flex-row justify-content-around align-items-center">
                     <div><img className='eximg my-1' src={eximg1} alt="" /></div>
@@ -220,9 +240,9 @@ export default function Home() {
                     <div><img className='eximg my-1' src={eximg5} alt="" /></div>
                     <div><img className='eximg my-1' src={eximg6} alt="" /></div>
                 </div>
-        </div>
-        <FlashSalCountDown/>
-        <div className="container rounded-1 my-3 pb-2 bg-white d-none d-md-block d-lg-block d-xl-block">
+            </div>
+            <FlashSalCountDown />
+            <div className="container rounded-1 my-3 pb-2 bg-white d-none d-md-block d-lg-block d-xl-block">
                 <h4 className='text-center p-3' style={{ backgroundColor: "#F7C1B2" }}>All Your Eid Groceries in One Place</h4>
                 <div className=" d-flex flex-row justify-content-around align-items-center">
                     <div><img className='eximg my-1' src={eximg1} alt="" /></div>
@@ -232,12 +252,12 @@ export default function Home() {
                     <div><img className='eximg my-1' src={eximg5} alt="" /></div>
                     <div><img className='eximg my-1' src={eximg6} alt="" /></div>
                 </div>
+            </div>
+            <FlashSalCountDown />
+            <BackToUpBtn />
+            <Declaration />
         </div>
-        <FlashSalCountDown/>
-            <BackToUpBtn/>
-            <Declaration/>
-    </div>
-                {/* Test */}
-        <Footer/>
+        {/* Test */}
+        <Footer />
     </>
 }
