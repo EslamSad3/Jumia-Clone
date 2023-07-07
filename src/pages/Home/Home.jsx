@@ -236,7 +236,7 @@ export default function Home() {
             <BackToUpBtn/>
             <Declaration/>
     </div>
-
+                {/* Test */}
         <Footer/>
     </>
 }
