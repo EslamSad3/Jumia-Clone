@@ -43,6 +43,7 @@ import Footer from '../../components/shared/Footer/Footer'
 import Declaration from '../../components/shared/Declaration/Declaration'
 import BackToUpBtn from '../../components/BackToUpBtn/BackToUpBtn'
 import FlashSalCountDown from '../../components/FlashSalCountDown/FlashSalCountDown'
+import { Link } from 'react-router-dom'
 export default function Home() {
     const catSlider = {
         dots: false,
@@ -120,6 +121,7 @@ export default function Home() {
             <div className="row pt-3">
 
                 <div className="col-sm-12 col-md-12 col-lg-2 bg-light categories border border-1 rounded d-flex flex-column justify-content-start " >
+                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-laptop me-2"></i> <Link to="/copmuting"> Copmuters</Link> </span>
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}>  <i class="fa-solid fa-apple-whole me-2"></i> Supermarket</span>
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-shirt me-2"></i> Fasion</span>
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-staff-snake me-2"></i> Health & Beauty</span>
@@ -128,7 +130,6 @@ export default function Home() {
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-house me-2"></i> Home & Furniture</span>
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-mug-hot me-2"></i> Appliances</span>
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-display me-2"></i>Electronics</span>
-                    <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-laptop me-2"></i>Computers</span>
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-dumbbell me-2"></i>Sporting Goods</span>
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-gamepad me-2"></i>Gamming</span>
                     <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-ellipsis me-2"></i> Other Categories</span>

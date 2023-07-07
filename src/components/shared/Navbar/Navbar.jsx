@@ -1,6 +1,7 @@
 import React from 'react'
 // import style from "./Navbar.module.css"
 import logo from "../../../assets/imgs/logo.png"
+import { Link } from 'react-router-dom'
 export default function Navbar() {
     return <>
         <nav className="navbar navbar-expand-sm navbar-light bg-white">
@@ -25,7 +26,7 @@ export default function Navbar() {
                         <li className="nav-item dropdown">
                             <a className="nav-link acc-drop  fw-bold dropdown-toggle" href="https://www.google.com" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-regular fa-user mx-2"></i>Account</a>
                             <div className="dropdown-menu align-items-center text-center ">
-                                <button className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">sign in</button>
+                                <Link to="/signin"><button className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">sign in</button></Link>
                                 <hr />
                                 <a className="dropdown-item text-start" href="https://www.google.com"> <i class="fa-regular fa-user "></i> My Account</a>
                                 <a className="dropdown-item text-start" href="https://www.google.com"> <i class="fa-solid fa-bag-shopping "></i> Orders</a>
@@ -45,7 +46,7 @@ export default function Navbar() {
                             </div>
                         </li>
                         <li>
-                        <a className="nav-link cart fw-bold" href="https://www.google.com"> <i class="fa-solid fa-cart-shopping"></i> Cart</a>
+                        <Link to="/cart"><span className="nav-link cart fw-bold" > <i class="fa-solid fa-cart-shopping"></i> Cart</span></Link>
                         </li>
                     </ul>
                 </div>
