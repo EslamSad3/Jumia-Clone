@@ -1,5 +1,5 @@
-import React from 'react'
-import style from "./Home.module.css"
+import React, { useEffect, useState } from 'react'
+import "./Home.css"
 import flash from "../../assets/imgs/flash-sale.png"
 import eid from "../../assets/imgs/Eid-offers.png"
 import img1 from "../../assets/imgs/slider/1.png"
@@ -44,6 +44,7 @@ import Declaration from '../../components/shared/Declaration/Declaration'
 import BackToUpBtn from '../../components/BackToUpBtn/BackToUpBtn'
 import FlashSalCountDown from '../../components/FlashSalCountDown/FlashSalCountDown'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 export default function Home() {
 
     // const [cat, setCat] = useState([])
@@ -129,7 +130,7 @@ export default function Home() {
                 <div className="row pt-3">
 
                     <div className="col-sm-12 col-md-12 col-lg-2 bg-light categories border border-1 rounded d-flex flex-column justify-content-start " >
-                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-laptop me-2"></i> <Link to="/copmuting"> Copmuting</Link> </span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-laptop me-2"></i> <Link to="/copmuting"> Copmuters</Link> </span>
                         <span className="my-1 cate-home" style={{ fontSize: "12px" }}>  <i class="fa-solid fa-apple-whole me-2"></i> Supermarket</span>
                         <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-shirt me-2"></i> Fasion</span>
                         <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-staff-snake me-2"></i> Health & Beauty</span>
@@ -200,7 +201,7 @@ export default function Home() {
                     </div>
                 </Slider>
 
-                {/*                 <Slider {...catSlider}>
+                {/* <Slider {...catSlider}>
                     {
                         cat.map((item, index) => {
                             return (
@@ -257,7 +258,6 @@ export default function Home() {
             <BackToUpBtn />
             <Declaration />
         </div>
-        {/* Test */}
         <Footer />
     </>
 }
