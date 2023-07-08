@@ -1,17 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@100;200;300;400;500;600;700;800;900&display=swap");
 :root {
   --btn-color: #e07e1b;
 }
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-body {
-  font-family: "Roboto", "-apple-system", "BlinkMacSystemFont", "Segoe UI",
-    "Helvetica Neue", "Arial", "sans-serif";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Banner */
@@ -29,8 +23,8 @@ body {
 /* Nav */
 
 /* .navbar{
-  height: 65px;
-} */
+    height: 65px;
+  } */
 
 .sign-in-btn {
   background-color: var(--btn-color);
@@ -88,7 +82,7 @@ input.form-control {
 
 .main {
   min-height: 100vh;
-  background: center 0 no-repeat url("./assets//imgs//new.jpg") #fe9900;
+  background: center 0 no-repeat url("../../assets//imgs/new.jpg") #fe9900;
   /* min-width: 1200px; */
 }
 
