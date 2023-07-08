@@ -258,6 +258,5 @@ export default function Home() {
             <BackToUpBtn />
             <Declaration />
         </div>
-        <Footer />
     </>
 }
