@@ -129,7 +129,7 @@ export default function Home() {
                 <div className="row pt-3">
 
                     <div className="col-sm-12 col-md-12 col-lg-2 bg-light categories border border-1 rounded d-flex flex-column justify-content-start " >
-                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-laptop me-2"></i> <Link to="/copmuting"> Copmuters</Link> </span>
+                        <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-laptop me-2"></i> <Link to="/copmuting"> Copmuting</Link> </span>
                         <span className="my-1 cate-home" style={{ fontSize: "12px" }}>  <i class="fa-solid fa-apple-whole me-2"></i> Supermarket</span>
                         <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-shirt me-2"></i> Fasion</span>
                         <span className="my-1 cate-home" style={{ fontSize: "12px" }}> <i class="fa-solid fa-staff-snake me-2"></i> Health & Beauty</span>
@@ -161,46 +161,46 @@ export default function Home() {
                 </div>
             </div>
             <div className="container mt-4 bg-white rounded mb-3">
-                 <Slider {...catSlider} >
-                <div>
-                    <img src={slid1} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div >
-                    <img src={slid2} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid3} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid4} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid5} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid6} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid7} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid8} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid9} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid10} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid11} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-                <div>
-                    <img src={slid12} alt="" className='w-100 h-100 m-2 px-1' />
-                </div>
-            </Slider> 
+                <Slider {...catSlider} >
+                    <div>
+                        <img src={slid1} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div >
+                        <img src={slid2} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid3} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid4} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid5} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid6} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid7} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid8} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid9} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid10} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid11} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                    <div>
+                        <img src={slid12} alt="" className='w-100 h-100 m-2 px-1' />
+                    </div>
+                </Slider>
 
-{/*                 <Slider {...catSlider}>
+                {/*                 <Slider {...catSlider}>
                     {
                         cat.map((item, index) => {
                             return (
