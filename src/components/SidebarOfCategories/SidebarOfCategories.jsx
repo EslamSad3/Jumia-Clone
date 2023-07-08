@@ -1,6 +1,6 @@
 import React from 'react'
 import PriceRangeBar from '../PriceRangeBar/PriceRangeBar'
-
+import "./SidebarOfCategories.css"
 export default function SidebarOfCategories() {
     return (
         <div className="">

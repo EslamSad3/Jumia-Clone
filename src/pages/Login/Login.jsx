@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./Login.module.css"
+import "./Login.css"
 import logotop from "../../assets/imgs/validation/myjumia-top-logo.png";
 import logobottom from "../../assets/imgs/validation/myjumia-bottom-logo.png";
 
@@ -38,11 +38,11 @@ const FormHeader = () => (
     />
     <h4
       className="mt-1 mb-1 pb-1 fw-bold"
-      style={{ 
-        color: "#4a4a4a", 
+      style={{
+        color: "#4a4a4a",
         fontSize: "20px",
-         fontWeight: "500",
-         }}
+        fontWeight: "500",
+      }}
     >
       Welcome back!
     </h4>
@@ -62,49 +62,49 @@ const FormHeader = () => (
 
 const Form = () => {
   const [showPassword, setShowPassword] = useState(false);
-  return(
-  <div>
-    <MDBInput
+  return (
+    <div>
+      <MDBInput
         wrapperClass="mb-1"
-      className="mb-4"
-          label="Email address"
+        className="mb-4"
+        label="Email address"
+        labelClass="mt-1"
+        id="form1"
+        type="email"
+        size="lg"
+        style={{ height: "56px", boxSizing: "border-box" }}
+      />
+      <div style={{ position: 'relative' }}>
+        <MDBInput
+          wrapperClass="mb-1"
+          className="mb-4"
+          label="Password"
           labelClass="mt-1"
-          id="form1"
-          type="email"
+          id="form2"
+          type={showPassword ? "text" : "password"}
           size="lg"
-           style={{ height: "56px", boxSizing: "border-box" }}
-    />
-    <div style={{position: 'relative'}}>
-    <MDBInput
-      wrapperClass="mb-1"
-      className="mb-4"
-      label="Password"
-      labelClass="mt-1"
-      id="form2"
-      type={showPassword ? "text" : "password"}
-      size="lg"
-      style={{ height: "56px", boxSizing: "border-box" }}
+          style={{ height: "56px", boxSizing: "border-box" }}
 
-    />
-      <ShowPasswordButton
-              showPassword={showPassword}
-              onClick={() => setShowPassword(!showPassword)}
-            />
-            </div>
-    <MDBBtn
-      className="mb-4 w-100 fw-bolder"
-      style={{ backgroundColor: "#f8972d" }}
-      size="lg"
-    >
-      Login
-    </MDBBtn>
-    <div className="text-center">
-      <a href="!#" className="mb-5 fw-bold" style={{ color: "#f8972d" }}>
-        Forgot your password?
-      </a>
+        />
+        <ShowPasswordButton
+          showPassword={showPassword}
+          onClick={() => setShowPassword(!showPassword)}
+        />
+      </div>
+      <MDBBtn
+        className="mb-4 w-100 fw-bolder"
+        style={{ backgroundColor: "#f8972d" }}
+        size="lg"
+      >
+        Login
+      </MDBBtn>
+      <div className="text-center">
+        <a href="!#" className="mb-5 fw-bold" style={{ color: "#f8972d" }}>
+          Forgot your password?
+        </a>
+      </div>
     </div>
-  </div>
-);
+  );
 }
 const FormFooter = () => (
   <div

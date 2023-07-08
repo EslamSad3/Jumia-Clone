@@ -1,5 +1,5 @@
 import React from 'react'
-import style from "./FlashSalCountDown.module.css"
+import  "./FlashSalCountDown.css"
 import Slider from "react-slick";
 import flashSale from "../../assets/imgs/flash/1.jpg"
 

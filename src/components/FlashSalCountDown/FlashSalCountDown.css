@@ -1,0 +1,8 @@
+.sell {
+  text-decoration: none;
+  color: #ff0000;
+}
+
+.sell:hover {
+  text-decoration: underline;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./prouductsDetails.module.css"
+import "./prouductsDetails.css"
 
 
 export default function ProductsDetails() {

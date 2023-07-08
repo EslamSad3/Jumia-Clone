@@ -1,5 +1,5 @@
 import React from 'react';
-import './Identification.module.css';
+import './Identification.css';
 import logotop from "../../assets/imgs/validation/myjumia-top-logo.png";
 import logobottom from "../../assets/imgs/validation/myjumia-bottom-logo.png";
 import { MDBContainer, MDBInput, MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
@@ -79,7 +79,7 @@ const EmailOrPhoneInput = ({ errors, touched }) => (
       )}
     />
 
-<ErrorMessage name="emailOrPhone">
+    <ErrorMessage name="emailOrPhone">
       {(msg) => (
         <div
           className="text-danger text-center"
@@ -124,13 +124,13 @@ const FacebookLoginButton = () => (
 
 const FormFooter = () => (
   <div className="text-center mt-5"
-  style={{    
-    fontSize: "14px",
-    lineHeight: "24px",
-    padding:" 0 24px",
-    position: "relative",
-    textAlign: "center"
-}}>
+    style={{
+      fontSize: "14px",
+      lineHeight: "24px",
+      padding: " 0 24px",
+      position: "relative",
+      textAlign: "center"
+    }}>
     <p>
       For further support, you may visit the Help Center or contact our
       customer service team.

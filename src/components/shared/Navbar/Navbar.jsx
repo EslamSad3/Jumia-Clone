@@ -1,5 +1,5 @@
 import React from 'react'
-// import style from "./Navbar.module.css"
+import "./Navbar.css"
 import logo from "../../../assets/imgs/logo.png"
 import { Link } from 'react-router-dom'
 export default function Navbar() {
@@ -8,14 +8,14 @@ export default function Navbar() {
             <div className="container row justify-content-center align-items-center ">
                 <div className="col-3 d-flex justify-content-center align-items-center">
                     <a href="/" className="d-flex justify-content-center align-items-center ">
-                        <img src={logo} className="logo" alt=""/>
+                        <img src={logo} className="logo" alt="" />
                     </a>
                 </div>
                 <form id="search" method="get" className="col-6 d-flex">
-                        <div className="input-group">
-                            <input type="text" className="form-control rounded-1" placeholder="Search products, brands and categories" />
-                             <button className="btn rounded-1 search-btn fw-bold d-none d-md-block d-lg-block d-xl-block text-white my-2 mx-2 my-sm-0 text-uppercase px-3" type="button">search</button>
-                        </div>
+                    <div className="input-group">
+                        <input type="text" className="form-control rounded-1" placeholder="Search products, brands and categories" />
+                        <button className="btn rounded-1 search-btn fw-bold d-none d-md-block d-lg-block d-xl-block text-white my-2 mx-2 my-sm-0 text-uppercase px-3" type="button">search</button>
+                    </div>
                 </form>
                 <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@ export default function Navbar() {
                             </div>
                         </li>
                         <li>
-                        <Link to="/cart"><span className="nav-link cart fw-bold" > <i class="fa-solid fa-cart-shopping"></i> Cart</span></Link>
+                            <Link to="/cart"><span className="nav-link cart fw-bold" > <i class="fa-solid fa-cart-shopping"></i> Cart</span></Link>
                         </li>
                     </ul>
                 </div>
@@ -54,4 +54,4 @@ export default function Navbar() {
         </nav>
     </>
 
-    }
+}

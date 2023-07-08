@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Declaration.module.css";
+import "./Declaration.css";
 export default function Declaration() {
     return (
         <div className="container my-3 bg-white rounded-1">
