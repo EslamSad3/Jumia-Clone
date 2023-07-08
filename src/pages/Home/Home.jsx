@@ -46,13 +46,13 @@ import FlashSalCountDown from '../../components/FlashSalCountDown/FlashSalCountD
 import { Link } from 'react-router-dom'
 export default function Home() {
 
-    const [cat, setCat] = useState([])
-    useEffect(() => {
-        axios.get("http://localhost:8000/api/team2/categories").then(res => {
-            // console.log(res.data.data);
-            setCat(res.data.data)
-        })
-    }, [])
+    // const [cat, setCat] = useState([])
+    // useEffect(() => {
+    //     axios.get("http://localhost:8000/api/team2/categories").then(res => {
+    //         // console.log(res.data.data);
+    //         setCat(res.data.data)
+    //     })
+    // }, [])
     const catSlider = {
         dots: false,
         arrows: true,
@@ -161,7 +161,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="container mt-4 bg-white rounded mb-3">
-                {/* <Slider {...catSlider} >
+                 <Slider {...catSlider} >
                 <div>
                     <img src={slid1} alt="" className='w-100 h-100 m-2 px-1' />
                 </div>
@@ -198,9 +198,9 @@ export default function Home() {
                 <div>
                     <img src={slid12} alt="" className='w-100 h-100 m-2 px-1' />
                 </div>
-            </Slider> */}
+            </Slider> 
 
-                <Slider {...catSlider}>
+{/*                 <Slider {...catSlider}>
                     {
                         cat.map((item, index) => {
                             return (
@@ -210,7 +210,7 @@ export default function Home() {
                             )
                         })
                     }
-                </Slider>
+                </Slider> */}
             </div>
             <div className='container bg-white'>
                 <div className="text d-flex justify-content-between align-items-center">
