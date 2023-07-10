@@ -46,6 +46,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 export default function Home() {
 
+    
     const [cat, setCat] = useState([])
     const [products, setproducts] = useState([])
     useEffect(() => {
