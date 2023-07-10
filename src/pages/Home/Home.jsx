@@ -13,18 +13,18 @@ import img8 from "../../assets/imgs/slider/8.jpg"
 
 // small slider
 
-import slid1 from "../../assets/imgs/catSlider/1.png"
-import slid2 from "../../assets/imgs/catSlider/2.png"
-import slid3 from "../../assets/imgs/catSlider/3.png"
-import slid4 from "../../assets/imgs/catSlider/4.png"
-import slid5 from "../../assets/imgs/catSlider/5.png"
-import slid6 from "../../assets/imgs/catSlider/6.png"
-import slid7 from "../../assets/imgs/catSlider/7.png"
-import slid8 from "../../assets/imgs/catSlider/8.png"
-import slid9 from "../../assets/imgs/catSlider/9.png"
-import slid10 from "../../assets/imgs/catSlider/10.png"
-import slid11 from "../../assets/imgs/catSlider/11.png"
-import slid12 from "../../assets/imgs/catSlider/12.png"
+// import slid1 from "../../assets/imgs/catSlider/1.png"
+// import slid2 from "../../assets/imgs/catSlider/2.png"
+// import slid3 from "../../assets/imgs/catSlider/3.png"
+// import slid4 from "../../assets/imgs/catSlider/4.png"
+// import slid5 from "../../assets/imgs/catSlider/5.png"
+// import slid6 from "../../assets/imgs/catSlider/6.png"
+// import slid7 from "../../assets/imgs/catSlider/7.png"
+// import slid8 from "../../assets/imgs/catSlider/8.png"
+// import slid9 from "../../assets/imgs/catSlider/9.png"
+// import slid10 from "../../assets/imgs/catSlider/10.png"
+// import slid11 from "../../assets/imgs/catSlider/11.png"
+// import slid12 from "../../assets/imgs/catSlider/12.png"
 
 // card
 
@@ -39,7 +39,6 @@ import eximg4 from "../../assets/imgs/extra/4.png"
 import eximg5 from "../../assets/imgs/extra/5.png"
 import eximg6 from "../../assets/imgs/extra/6.png"
 import Slider from "react-slick";
-import Footer from '../../components/shared/Footer/Footer'
 import Declaration from '../../components/shared/Declaration/Declaration'
 import BackToUpBtn from '../../components/BackToUpBtn/BackToUpBtn'
 import FlashSalCountDown from '../../components/FlashSalCountDown/FlashSalCountDown'
@@ -47,13 +46,23 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 export default function Home() {
 
-    // const [cat, setCat] = useState([])
-    // useEffect(() => {
-    //     axios.get("http://localhost:8000/api/team2/categories").then(res => {
-    //         // console.log(res.data.data);
-    //         setCat(res.data.data)
-    //     })
-    // }, [])
+    const [cat, setCat] = useState([])
+    const [products, setproducts] = useState([])
+    useEffect(() => {
+        axios.get("https://jumia-clone-api-9qqm.onrender.com/api/team2/categories?limit=12").then(res => {
+            const data = res.data.data
+            setCat(data)
+        })
+    }, [])
+
+    useEffect(() => {
+        axios.get("https://jumia-clone-api-9qqm.onrender.com/api/team2/products?limit=3").then(res => {
+            // console.log(res.data.Products);    
+            const prodata = res.data.Products
+            console.log(prodata);
+            setproducts(prodata)
+        })
+    }, [])
     const catSlider = {
         dots: false,
         arrows: true,
@@ -162,7 +171,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="container mt-4 bg-white rounded mb-3">
-                <Slider {...catSlider} >
+                {/* <Slider {...catSlider} >
                     <div>
                         <img src={slid1} alt="" className='w-100 h-100 m-2 px-1' />
                     </div>
@@ -199,9 +208,9 @@ export default function Home() {
                     <div>
                         <img src={slid12} alt="" className='w-100 h-100 m-2 px-1' />
                     </div>
-                </Slider>
+                </Slider> */}
 
-                {/* <Slider {...catSlider}>
+                <Slider {...catSlider}>
                     {
                         cat.map((item, index) => {
                             return (
@@ -211,23 +220,38 @@ export default function Home() {
                             )
                         })
                     }
-                </Slider> */}
+                </Slider>
             </div>
-            <div className='container bg-white'>
+            <div className='container bg-white' >
                 <div className="text d-flex justify-content-between align-items-center">
                     <p className='h5 m-2'>Keep Shopping For</p>
                     <a href="#" className='sell m-2'> SEE ALL <i className='fa fa-arrow-right'></i></a>
                 </div>
-                <a >
-                    {/* <div className="card border border-0">
-                    <img className=' card-img-top keep-img' src={keep} alt="Title"  style={{ width: "150px", height: "150px" }} />
-                    <div className="card-body">
-                    <div class="price h5">EGP 73.20</div>
-                        <small className="prev-price">EGP 150.00</small>
+                    <div className='d-flex '>
+                    {
+                    products.map((item) => {
+                        return (
+                            // <div className="card border border-0 keep-img w-100 mx-2 py-3">
+                            //     <img className=' card-img-top ' src={item.imageCover} alt="Title" style={{ width: "150px", height: "150px" }} />
+                            //     <div className="card-body">
+                            //     <p className='price'>{item.name}</p>
+                            //         <p class="price h5">EGP {item.priceAfterDiscount}</p>
+                            //         <small className="prev-price"> EGP {item.price}</small>
+                            //     </div>
+                            // </div>
+
+                            <div className="card keep-img w-100">
+                                <img className="card-img-top" src={item.imageCover} alt="Title" style={{ width: "150px", height: "150px" }}/>
+                                <div className="card-body">
+                                    <h4 className="card-title">{item.name}</h4>
+                                    <p className="card-text price" >EFP {item.price}</p>
+                                    <small className=" card-text prev-price"> EGP {item.price}</small>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
                     </div>
-                </div> */}
-                    <img className='keep-img' src={keep2} alt="" />
-                </a>
             </div>
 
             {/* Extra Discounds */}
