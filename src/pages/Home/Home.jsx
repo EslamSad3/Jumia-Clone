@@ -46,7 +46,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 export default function Home() {
 
-    
+
     const [cat, setCat] = useState([])
     const [products, setproducts] = useState([])
     useEffect(() => {
@@ -232,15 +232,6 @@ export default function Home() {
                     {
                     products.map((item) => {
                         return (
-                            // <div className="card border border-0 keep-img w-100 mx-2 py-3">
-                            //     <img className=' card-img-top ' src={item.imageCover} alt="Title" style={{ width: "150px", height: "150px" }} />
-                            //     <div className="card-body">
-                            //     <p className='price'>{item.name}</p>
-                            //         <p class="price h5">EGP {item.priceAfterDiscount}</p>
-                            //         <small className="prev-price"> EGP {item.price}</small>
-                            //     </div>
-                            // </div>
-
                             <div className="card keep-img w-100">
                                 <img className="card-img-top" src={item.imageCover} alt="Title" style={{ width: "150px", height: "150px" }}/>
                                 <div className="card-body">
