@@ -71,7 +71,7 @@ export default function FlashSalCountDown() {
                             <div className="card-body">
                                 <p>{item.name}</p>
                                 <h4 className="card-title">EGP {item.price}</h4>
-                                <p className="card-text">26 Items Left</p>
+                                <p className="card-text">25 Items Left</p>
                                 <div className="progress">
                                     <div className="progress-bar bg-warning" role="progressbar" style={{ width: "90%" }}
                                         aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
