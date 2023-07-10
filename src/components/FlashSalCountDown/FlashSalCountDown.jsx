@@ -1,16 +1,28 @@
-import React from 'react'
-import  "./FlashSalCountDown.css"
+import React, { useEffect, useState } from 'react'
+import "./FlashSalCountDown.css"
 import Slider from "react-slick";
 import flashSale from "../../assets/imgs/flash/1.jpg"
+import axios from 'axios';
 
 export default function FlashSalCountDown() {
+    const [allproducts, setAllproducts] = useState([])
+
+
+    useEffect(() => {
+        axios.get("https://jumia-clone-api-9qqm.onrender.com/api/team2/products").then(res => {
+            // console.log(res.data.Products);    
+            const allproducts = res.data.Products
+            console.log(allproducts);
+            setAllproducts(allproducts)
+        })
+    }, [])
     const flashSettings = {
         dots: false,
         arrows: true,
         infinite: false,
         speed: 500,
-        slidesToShow: 6,
-        slidesToScroll: 4,
+        slidesToShow: 4,
+        slidesToScroll: 1,
         responsive: [
             {
                 breakpoint: 1024,
@@ -51,231 +63,24 @@ export default function FlashSalCountDown() {
             </div>
         </div>
         <Slider {...flashSettings} >
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+            {
+                allproducts.map((item) => {
+                    return <div className='d-flex justify-content-center align-items-center h-100'>
+                        <div className="card border border-0">
+                            <img src={item.imageCover} alt="" className='' />
+                            <div className="card-body">
+                                <p>{item.name}</p>
+                                <h4 className="card-title">EGP {item.price}</h4>
+                                <p className="card-text">26 Items Left</p>
+                                <div className="progress">
+                                    <div className="progress-bar bg-warning" role="progressbar" style={{ width: "90%" }}
+                                        aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card border border-0">
-                    <img src={flashSale} alt="" className='' />
-                    <div class="card-body">
-                        <p>Ahmed Beh French Coffee - Chocolate Flavor - 200gm</p>
-                        <h4 class="card-title">EGP 54.10</h4>
-                        <p class="card-text">26 Items Left</p>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style={{width: "90%"}}
-                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+                })
+            }
         </Slider>
     </div>
 }
