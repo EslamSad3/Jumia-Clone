@@ -228,22 +228,22 @@ export default function Home() {
                     <p className='h5 m-2'>Keep Shopping For</p>
                     <a href="#" className='sell m-2'> SEE ALL <i className='fa fa-arrow-right'></i></a>
                 </div>
-                    <div className='d-flex '>
+                <div className='d-flex '>
                     {
-                    products.map((item) => {
-                        return (
-                            <div className="card keep-img w-100">
-                                <img className="card-img-top" src={item.imageCover} alt="Title" style={{ width: "150px", height: "150px" }}/>
-                                <div className="card-body">
-                                    <h4 className="card-title">{item.name}</h4>
-                                    <p className="card-text price" >EFP {item.price}</p>
-                                    <small className=" card-text prev-price"> EGP {item.price}</small>
+                        products.map((item) => {
+                            return (
+                                <div className="card keep-img w-100">
+                                    <img className="card-img-top" src={item.imageCover} alt="Title" style={{ width: "150px", height: "150px" }} />
+                                    <div className="card-body">
+                                        <h4 className="card-title">{item.name}</h4>
+                                        <p className="card-text price" >EFP {item.price}</p>
+                                        <small className=" card-text prev-price"> EGP {item.price}</small>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
-                    </div>
+                            )
+                        })
+                    }
+                </div>
             </div>
 
             {/* Extra Discounds */}
