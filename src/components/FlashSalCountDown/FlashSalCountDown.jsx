@@ -3,6 +3,7 @@ import "./FlashSalCountDown.css"
 import Slider from "react-slick";
 import flashSale from "../../assets/imgs/flash/1.jpg"
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function FlashSalCountDown() {
     const [allproducts, setAllproducts] = useState([])
@@ -65,7 +66,8 @@ export default function FlashSalCountDown() {
         <Slider {...flashSettings} >
             {
                 allproducts.map((item) => {
-                    return <div className='d-flex justify-content-center align-items-center h-100'>
+                    return <Link to={`/productdetails/${item.id}`}>
+                    <div className='d-flex justify-content-center align-items-center h-100'>
                         <div className="card border border-0">
                             <img src={item.imageCover} alt="" className='' />
                             <div className="card-body">
@@ -79,6 +81,7 @@ export default function FlashSalCountDown() {
                             </div>
                         </div>
                     </div>
+                    </Link>
                 })
             }
         </Slider>

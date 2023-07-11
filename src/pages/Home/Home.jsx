@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import "./Home.css"
-import flash from "../../assets/imgs/flash-sale.png"
-import eid from "../../assets/imgs/Eid-offers.png"
-import img1 from "../../assets/imgs/slider/1.png"
-import img2 from "../../assets/imgs/slider/2.png"
-import img3 from "../../assets/imgs/slider/3.jpg"
-import img4 from "../../assets/imgs/slider/4.jpg"
-import img5 from "../../assets/imgs/slider/5.jpg"
-import img6 from "../../assets/imgs/slider/6.jpg"
-import img7 from "../../assets/imgs/slider/7.jpg"
-import img8 from "../../assets/imgs/slider/8.jpg"
+import React, { useEffect, useState } from 'react';
+
+import "./Home.css";
+import flash from "../../assets/imgs/flash-sale.png";
+import eid from "../../assets/imgs/Eid-offers.png";
+import img1 from "../../assets/imgs/slider/1.png";
+import img2 from "../../assets/imgs/slider/2.png";
+import img3 from "../../assets/imgs/slider/3.jpg";
+import img4 from "../../assets/imgs/slider/4.jpg";
+import img5 from "../../assets/imgs/slider/5.jpg";
+import img6 from "../../assets/imgs/slider/6.jpg";
+import img7 from "../../assets/imgs/slider/7.jpg";
+import img8 from "../../assets/imgs/slider/8.jpg";
 
 // small slider
 
@@ -228,28 +229,44 @@ export default function Home() {
                     <p className='h5 m-2'>Keep Shopping For</p>
                     <a href="#" className='sell m-2'> SEE ALL <i className='fa fa-arrow-right'></i></a>
                 </div>
-                <div className='d-flex '>
+                </div>
+
+                <div className=' row d-flex container m-auto'>
+
                     {
                         products.map((item) => {
                             return (
-                                <div className="card keep-img w-100">
-                                    <img className="card-img-top" src={item.imageCover} alt="Title" style={{ width: "150px", height: "150px" }} />
+
+                                <div className='col-md-4 py-3 '  >
+
+                                <Link to={`/productdetails/${item.id}`} className='w-100 text-decoration-none '>
+
+
+                                <div className="card " >
+                                    <img className="w-100 pt-2" style={{ maxHeight: '300px' }} src={item.imageCover} alt="Title"  />
                                     <div className="card-body">
-                                        <h4 className="card-title">{item.name}</h4>
-                                        <p className="card-text price" >EFP {item.price}</p>
+                                        <h6 className="card-title">{item.name}</h6>
+                                        <p className="card-text price m-0" >EFP {item.priceAfterDiscount}</p>
                                         <small className=" card-text prev-price"> EGP {item.price}</small>
+                                        {/* <p>{item.id}</p> */}
                                     </div>
                                 </div>
+
+                                </Link>
+                                </div>
+
+
                             )
                         })
                     }
-                </div>
-            </div>
+                                                    </div>
+
 
             {/* Extra Discounds */}
             <div className="container rounded-1 my-3 pb-2 bg-white d-none d-md-block d-lg-block d-xl-block">
                 <h4 className='text-center p-3' style={{ backgroundColor: "#E2F5FF" }}>EXTRA DISCOUNTS FOR YOU</h4>
                 <div className=" d-flex flex-row justify-content-around align-items-center">
+                
                     <div><img className='eximg my-1' src={eximg1} alt="" /></div>
                     <div><img className='eximg my-1' src={eximg2} alt="" /></div>
                     <div><img className='eximg my-1' src={eximg3} alt="" /></div>
