@@ -22,7 +22,7 @@ function index() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/copmuting" element={<Copmuting />} />
-        <Route path="/productdetails" element={<ProductsDetails />} />
+        <Route path="/productdetails/:id" element={<ProductsDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
       </Route>
