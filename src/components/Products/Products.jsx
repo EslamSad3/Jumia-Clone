@@ -19,7 +19,7 @@ function SearchProducts() {
             <div className="col-8 my-4 p-3 bg-white">
                 <div >
                     <div className='d-flex justify-content-between'>
-                        <br />
+                        {`Pooducts : ${products.length} `}
                         <div className="dropdown cursor-pointer">
                             <span className=" dropdown-toggle" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
