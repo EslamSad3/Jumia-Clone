@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-  Routes,
-} from "react-router-dom";
+import {createBrowserRouter, RouterProvider, Route,Link,Routes} from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import Home from "../pages/Home/Home";
 import Copmuting from "../pages/Categories/Copmuting";
@@ -16,17 +10,18 @@ import Registraion from "../pages/Registraion/Registraion";
 import Identification from "../pages/Identification/Identification";
 import NotFound from "../pages/NotFound/NotFound";
 
-function index() {
+function index({ userData, saveUserData }) {
+  console.log(userData);
   return (
     <Routes>
-      <Route element={<Layout />}>
+      <Route element={<Layout userData={userData} />}>
         <Route path="/" element={<Home />} />
         <Route path="/copmuting" element={<Copmuting />} />
-        <Route path="/productdetails/:id" element={<ProductsDetails />} />
+        <Route path="/productdetails" element={<ProductsDetails />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="*" element={<NotFound />} />
+       <Route path="*" element={<NotFound />} />
       </Route>
-      <Route path="/signin" element={<Login />} />
+      <Route path="/signin" element={<Login saveUserData={saveUserData} />} />
       <Route path="/signup" element={<Registraion />} />
       <Route path="/identification" element={<Identification />} />
     </Routes>
@@ -34,3 +29,4 @@ function index() {
 }
 
 export default index;
+

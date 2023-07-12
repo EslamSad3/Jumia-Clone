@@ -4,11 +4,11 @@ import Footer from '../shared/Footer/Footer'
 import Banner from '../shared/Banner/Banner'
 import Languages from '../shared/Languages/Languages'
 import { Outlet } from 'react-router-dom'
-export default function Layout() {
+export default function Layout({userData}) {
     return <>
         <Banner />
         <Languages />
-        <Navbar />
+        <Navbar userData={userData}/>
         <Outlet>
             
         </Outlet>
