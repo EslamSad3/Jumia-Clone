@@ -22,6 +22,7 @@ function index({ userData, saveUserData }) {
   return (
     <Routes>
       <Route element={<Layout userData={userData} />}>
+<<<<<<< HEAD
         <Route path="/" element={<Home />} />
         <Route path="/copmuting" element={<Copmuting />} />
         {/* <Route path="/productdetails" element={<ProductsDetails />} /> */}
@@ -29,6 +30,15 @@ function index({ userData, saveUserData }) {
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
         <Route path="*" element={<NotFound />} />
+=======
+          <Route path="/" element={<Home />} />
+          <Route path="/copmuting" element={<Copmuting />} />
+          {/* <Route path="/productdetails" element={<ProductsDetails />} /> */}
+          <Route path="/productdetails/:id" element={<ProductsDetails userData={userData}/>} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/search" element={<SearchProducts/>} />
+          <Route path="*" element={<NotFound />} />
+>>>>>>> d40d20fdcf507a79fa5e83afcdc838c6b1a0a291
       </Route>
       <Route path="/signin" element={<Login saveUserData={saveUserData} />} />
       <Route path="/signup" element={<Registraion />} />
