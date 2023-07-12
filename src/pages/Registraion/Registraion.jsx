@@ -366,15 +366,10 @@ function Registration() {
       if (response.status === 201) {
         navigate("/signin");
       }
-      if (response.status === 400) {
-        console.log("Email already in use");
-        //  setFieldError("email", "Email already in use");
-      }
     } catch (error) {
       if (error.response.status === 400) {
         setFieldError("email", "Email already in use");
       }
-      // console.log(JSON.stringify(error.response.data, null, 2));
     }
   }
   return (
