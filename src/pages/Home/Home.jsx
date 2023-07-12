@@ -173,44 +173,6 @@ export default function Home() {
                 </div>
             </div>
             <div className="container mt-4 bg-white rounded mb-3">
-                {/* <Slider {...catSlider} >
-                    <div>
-                        <img src={slid1} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div >
-                        <img src={slid2} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid3} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid4} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid5} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid6} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid7} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid8} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid9} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid10} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid11} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                    <div>
-                        <img src={slid12} alt="" className='w-100 h-100 m-2 px-1' />
-                    </div>
-                </Slider> */}
 
                 <Slider {...catSlider}>
                     {
@@ -227,46 +189,37 @@ export default function Home() {
             <div className='container bg-white' >
                 <div className="text d-flex justify-content-between align-items-center">
                     <p className='h5 m-2'>Keep Shopping For</p>
-                    <a href="#" className='sell m-2'> SEE ALL <i className='fa fa-arrow-right'></i></a>
+                    <Link to="/products"><a className='sell m-2'> SEE ALL <i className='fa fa-arrow-right'></i></a></Link>
                 </div>
-                </div>
+            </div>
 
-                <div className=' row d-flex container m-auto'>
-
-                    {
-                        products.map((item) => {
-                            return (
-
-                                <div className='col-md-4 py-3 '  >
-
+            <div className=' row d-flex container m-auto'>
+                {
+                    products.map((item) => {
+                        return (
+                            <div className='col-md-4 py-3 '  >
                                 <Link to={`/productdetails/${item.id}`} className='w-100 text-decoration-none '>
-
-
-                                <div className="card " >
-                                    <img className="w-100 pt-2" style={{ maxHeight: '300px' }} src={item.imageCover} alt="Title"  />
-                                    <div className="card-body">
-                                        <h6 className="card-title">{item.name}</h6>
-                                        <p className="card-text price m-0" >EFP {item.priceAfterDiscount}</p>
-                                        <small className=" card-text prev-price"> EGP {item.price}</small>
-                                        {/* <p>{item.id}</p> */}
+                                    <div className="card " >
+                                        <img className="w-100 pt-2" style={{ maxHeight: '300px' }} src={item.imageCover} alt="Title" />
+                                        <div className="card-body">
+                                            <h6 className="card-title price">{item.name}</h6>
+                                            <p className="card-text price m-0" >EFP {item.priceAfterDiscount}</p>
+                                            <small className=" card-text prev-price"> EGP {item.price}</small>
+                                        </div>
                                     </div>
-                                </div>
-
                                 </Link>
-                                </div>
-
-
-                            )
-                        })
-                    }
-                                                    </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
 
 
             {/* Extra Discounds */}
             <div className="container rounded-1 my-3 pb-2 bg-white d-none d-md-block d-lg-block d-xl-block">
                 <h4 className='text-center p-3' style={{ backgroundColor: "#E2F5FF" }}>EXTRA DISCOUNTS FOR YOU</h4>
                 <div className=" d-flex flex-row justify-content-around align-items-center">
-                
+
                     <div><img className='eximg my-1' src={eximg1} alt="" /></div>
                     <div><img className='eximg my-1' src={eximg2} alt="" /></div>
                     <div><img className='eximg my-1' src={eximg3} alt="" /></div>

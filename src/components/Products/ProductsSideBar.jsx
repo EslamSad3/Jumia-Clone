@@ -1,7 +1,7 @@
 import React from 'react'
-import "./SearchSideBar.css"
+import "./ProductsSideBar.css"
 import { Link } from 'react-router-dom'
-function SearchSIdeBar() {
+function ProductsSideBar() {
     return (
         <div className='cat-sidebar my-4 p-3 bg-white'>
             <div>
@@ -95,4 +95,4 @@ function SearchSIdeBar() {
     )
 }
 
-export default SearchSIdeBar
+export default ProductsSideBar

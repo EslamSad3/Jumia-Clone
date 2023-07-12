@@ -59,27 +59,28 @@ export default function FlashSalCountDown() {
                 <h4><span className='timer'>Limited Offers</span></h4>
             </div>
             <div className="col">
-                <a href="#" className='sell text-white'>SEE All <i className='fa fa-arrow-alt-circle-right'></i></a>
+
+                <Link to="/products"><a className='sell text-white'>SEE All <i className='fa fa-arrow-alt-circle-right'></i></a></Link>
             </div>
         </div>
         <Slider {...flashSettings} >
             {
                 allproducts.map((item) => {
                     return <Link to={`/productdetails/${item.id}`}>
-                    <div className='d-flex justify-content-center align-items-center h-100'>
-                        <div className="card border border-0">
-                            <img src={item.imageCover} alt="" className='' />
-                            <div className="card-body">
-                                <p>{item.name}</p>
-                                <h4 className="card-title">EGP {item.price}</h4>
-                                <p className="card-text">25 Items Left</p>
-                                <div className="progress">
-                                    <div className="progress-bar bg-warning" role="progressbar" style={{ width: "90%" }}
-                                        aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div className='d-flex justify-content-center align-items-center h-100'>
+                            <div className="card border border-0">
+                                <img src={item.imageCover} alt="" className='' />
+                                <div className="card-body">
+                                    <p>{item.name}</p>
+                                    <h4 className="card-title">EGP {item.price}</h4>
+                                    <p className="card-text">25 Items Left</p>
+                                    <div className="progress">
+                                        <div className="progress-bar bg-warning" role="progressbar" style={{ width: "90%" }}
+                                            aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </Link>
                 })
             }

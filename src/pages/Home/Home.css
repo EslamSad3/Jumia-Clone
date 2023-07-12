@@ -8,7 +8,10 @@
   box-sizing: border-box;
 }
 
-.price{
+.price {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -17,9 +20,6 @@
   background-color: #f1f1f2;
   width: 100%;
 }
-
-
-
 
 /* Home */
 
@@ -52,4 +52,3 @@
 .eximg:hover {
   scale: 1.01;
 }
-

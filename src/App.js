@@ -8,15 +8,15 @@ function App() {
   const [userData, setuserData] = useState(null);
   function saveUserData() {
     let userlogintoken = localStorage.getItem("UserToken");
-    if(userlogintoken){
+    if (userlogintoken) {
       let decodedToken = jwtDecode(userlogintoken);
       setuserData(decodedToken.name);
-      console.log(decodedToken)
+      console.log(decodedToken);
     }
   }
-  useEffect(()=>{
-    saveUserData()
-  },[])
+  useEffect(() => {
+    saveUserData();
+  }, []);
   return (
     <BrowserRouter>
       <Route saveUserData={saveUserData} userData={userData} />
