@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./FlashSalCountDown.css"
 import Slider from "react-slick";
-import flashSale from "../../assets/imgs/flash/1.jpg"
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
