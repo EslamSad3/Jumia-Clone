@@ -27,7 +27,7 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-const ShowPasswordButton = ({ showPassword, onClick }) => (
+const ShowPasswordButton = ({ inputField, showPassword, showConfirmPassword, onClick }) => (
   <button
     type="button"
     onClick={onClick}
@@ -36,7 +36,7 @@ const ShowPasswordButton = ({ showPassword, onClick }) => (
       fontSize: "19px",
       position: "absolute",
       right: "10px",
-      top: "calc(50% - 23px)",
+      top: inputField === "password" ? "calc(50% - 28px)" : "calc(50% - 22px)",
       backgroundColor: "transparent",
       border: "none",
       cursor: "pointer",
@@ -128,7 +128,7 @@ const UsernameInput = ({ touched, errors }) => (
 
 const EmailInput = ({ touched, errors }) => (
   <div
-    className="input-group mb-3 mt-4"
+    className="input-group mb-4 mt-4"
     style={{
       display: "flex",
       flexDirection: "column",
@@ -150,6 +150,7 @@ const EmailInput = ({ touched, errors }) => (
         />
       )}
     </Field>
+    
     <ErrorMessage name="email">
       {(msg) => (
         <div
@@ -204,11 +205,11 @@ const PasswordInput = ({
 
   return (
     <div
-      className="input-group mb-5"
+      className="input-group mb-4"
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "72px",
+        minHeight: "72px",
       }}
     >
       <Field name="password">
@@ -226,13 +227,15 @@ const PasswordInput = ({
                 errors.password && touched.password ? "is-invalid" : ""
               }
             />
-            <ShowPasswordButton
+            <ShowPasswordButton 
               showPassword={showPassword}
               onClick={() => setShowPassword(!showPassword)}
+              inputField="password" 
             />
           </>
         )}
       </Field>
+      <div style={{ height: "30px" }}>
       {passwordStrength && (
         <div className={`strength-bar ${passwordStrength} mb-1 mt-2`}>
           <div className="bar weak"></div>
@@ -255,6 +258,7 @@ const PasswordInput = ({
         )}
       </ErrorMessage>
     </div>
+    </div>
   );
 };
 
@@ -276,7 +280,6 @@ const ConfirmPasswordInput = ({
       <Field name="passwordConfirm">
         {({ field }) => (
           <>
-            {" "}
             <MDBInput
               wrapperClass="mb-1"
               label="Confirm Password*"
@@ -354,7 +357,7 @@ const FormFooter = () => (
 function Registration() {
   const [passwordStrength, setPasswordStrength] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
   async function handleRegister(values, { setFieldError }) {
     try {
@@ -374,7 +377,6 @@ function Registration() {
       // console.log(JSON.stringify(error.response.data, null, 2));
     }
   }
-
   return (
     <MDBContainer
       className="p-3 my-5 d-flex flex-column"
@@ -407,8 +409,8 @@ function Registration() {
             <ConfirmPasswordInput
               errors={errors}
               touched={touched}
-              showPassword={showPassword}
-              setShowPassword={setShowPassword}
+              showPassword={showConfirmPassword}
+              setShowPassword={setShowConfirmPassword}
             />
             <ContinueButton />
             <FormFooter />
