@@ -3,6 +3,9 @@ import "./Navbar.css"
 import logo from "../../../assets/imgs/logo.png";
 import { Link } from "react-router-dom";
 export default function Navbar({ userData }) {
+  function signOut(){
+    localStorage.removeItem("UserToken")
+  }
   console.log(userData);
   return (
     <>
@@ -56,11 +59,15 @@ export default function Navbar({ userData }) {
                   <i class="fa-regular fa-user mx-2"></i>{userData ? `Hi, ${userData}`:"Account"}
                 </a>
                 <div className="dropdown-menu align-items-center text-center ">
-                  <Link to="/signin">
+                  {userData ? <Link to="/signin">
+                    <button onClick={()=> signOut()} className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">
+                      Sign Out
+                    </button>
+                  </Link> :<Link to="/signin">
                     <button className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">
                       sign in
                     </button>
-                  </Link>
+                  </Link>}
                   <hr />
                   <a
                     className="dropdown-item text-start"

@@ -57,7 +57,7 @@ export default function FlashSalCountDown() {
                 <h4> <i class="fa-solid fa-tag"></i> Flash Sales Every Day</h4>
             </div>
             <div className="col">
-                <h4>Time Left: <span className='timer'>hh:mm:ss </span></h4>
+                <h4><span className='timer'>Limited Offers</span></h4>
             </div>
             <div className="col">
                 <a href="#" className='sell text-white'>SEE All <i className='fa fa-arrow-alt-circle-right'></i></a>
