@@ -1,5 +1,4 @@
 import React from 'react'
-import style from "./Layout.module.css"
 import Navbar from '../shared/Navbar/Navbar'
 import Footer from '../shared/Footer/Footer'
 import Banner from '../shared/Banner/Banner'
