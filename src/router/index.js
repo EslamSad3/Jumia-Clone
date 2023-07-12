@@ -18,7 +18,7 @@ function index({ userData, saveUserData }) {
       <Route element={<Layout userData={userData} />}>
           <Route path="/" element={<Home />} />
           <Route path="/copmuting" element={<Copmuting />} />
-          <Route path="/productdetails" element={<ProductsDetails />} />
+          {/* <Route path="/productdetails" element={<ProductsDetails />} /> */}
           <Route path="/productdetails/:id" element={<ProductsDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/search" element={<SearchProducts/>} />
