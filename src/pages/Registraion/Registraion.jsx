@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./Registraion.css"
+import "./Registraion.css";
 import logotop from "../../assets/imgs/validation/myjumia-top-logo.png";
 import logobottom from "../../assets/imgs/validation/myjumia-bottom-logo.png";
 import { MDBContainer, MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Username is required")
+    .min(3, "Username must be at least 3 characters long"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -17,8 +22,8 @@ const validationSchema = Yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
     ),
-  confirmPassword: Yup.string()
-    .required("Both passwords must match")
+  passwordConfirm: Yup.string()
+    .required("Confirm password is required")
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
@@ -79,9 +84,51 @@ const FormHeader = () => (
   </div>
 );
 
+const UsernameInput = ({ touched, errors }) => (
+  <div
+    className="input-group mb-3 mt-4"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      height: "72px", // Fixed height
+    }}
+  >
+    <Field name="name">
+      {({ field }) => (
+        <MDBInput
+          wrapperClass="mb-1"
+          label="Username"
+          labelClass="mt-1"
+          id="form3"
+          type="text"
+          size="lg"
+          style={{ height: "56px", boxSizing: "border-box" }}
+          className={errors.name && touched.name ? "is-invalid" : ""}
+          {...field}
+        />
+      )}
+    </Field>
+    <ErrorMessage name="name">
+      {(msg) => (
+        <div
+          className="text-danger text-center"
+          style={{
+            fontSize: "12px",
+            fontWeight: "400",
+            letterSpacing: "0.4px",
+          }}
+        >
+          {msg}
+        </div>
+      )}
+    </ErrorMessage>
+  </div>
+);
+
+
 const EmailInput = ({ touched, errors }) => (
   <div
-    className="input-group mb-5"
+    className="input-group mb-3 mt-4"
     style={{
       display: "flex",
       flexDirection: "column",
@@ -98,7 +145,7 @@ const EmailInput = ({ touched, errors }) => (
           type="email"
           size="lg"
           style={{ height: "56px", boxSizing: "border-box" }}
-          className={errors.password && touched.password ? "is-invalid" : ""}
+          className={errors.email && touched.email ? "is-invalid" : ""}
           {...field}
         />
       )}
@@ -120,9 +167,15 @@ const EmailInput = ({ touched, errors }) => (
   </div>
 );
 
-const PasswordInput = ({ values, errors, touched }) => {
-  const [passwordStrength, setPasswordStrength] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
+const PasswordInput = ({
+  values,
+  errors,
+  touched,
+  showPassword,
+  setShowPassword,
+  passwordStrength,
+  setPasswordStrength,
+}) => {
   useEffect(() => {
     if (values.password.length === 0) {
       setPasswordStrength(null);
@@ -165,7 +218,6 @@ const PasswordInput = ({ values, errors, touched }) => {
               label="Password*"
               labelClass="mt-1"
               id="form2"
-              // type="password"
               type={showPassword ? "text" : "password"}
               size="lg"
               style={{ height: "56px", boxSizing: "border-box" }}
@@ -206,18 +258,22 @@ const PasswordInput = ({ values, errors, touched }) => {
   );
 };
 
-const ConfirmPasswordInput = ({ errors, touched }) => {
-  const [showPassword, setShowPassword] = useState(false);
+const ConfirmPasswordInput = ({
+  errors,
+  touched,
+  showPassword,
+  setShowPassword,
+}) => {
   return (
     <div
-      className="input-group mb-5"
+      className="input-group mb-4"
       style={{
         display: "flex",
         flexDirection: "column",
         height: "72px",
       }}
     >
-      <Field name="confirmPassword">
+      <Field name="passwordConfirm">
         {({ field }) => (
           <>
             {" "}
@@ -231,7 +287,7 @@ const ConfirmPasswordInput = ({ errors, touched }) => {
               style={{ height: "56px", boxSizing: "border-box" }}
               {...field}
               className={
-                errors.confirmPassword && touched.confirmPassword
+                errors.passwordConfirm && touched.passwordConfirm
                   ? "is-invalid"
                   : ""
               }
@@ -243,7 +299,7 @@ const ConfirmPasswordInput = ({ errors, touched }) => {
           </>
         )}
       </Field>
-      <ErrorMessage name="confirmPassword">
+      <ErrorMessage name="passwordConfirm">
         {(msg) => (
           <div
             className="text-danger text-center"
@@ -296,6 +352,29 @@ const FormFooter = () => (
 );
 
 function Registration() {
+  const [passwordStrength, setPasswordStrength] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+  async function handleRegister(values, { setFieldError }) {
+    try {
+      const response = await axios.post('https://jumia-clone-api-9qqm.onrender.com/api/team2/auth/signup', values);
+      console.log(response);
+      if (response.status === 201) {
+        navigate("/signin");
+      }
+      if (response.status === 400) {
+        console.log("Email already in use");
+        //  setFieldError("email", "Email already in use");
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        setFieldError("email", "Email already in use");
+      }
+      // console.log(JSON.stringify(error.response.data, null, 2));
+    }
+  }
+
   return (
     <MDBContainer
       className="p-3 my-5 d-flex flex-column"
@@ -303,22 +382,34 @@ function Registration() {
     >
       <Formik
         initialValues={{
+          name:"",
           email: "",
           password: "",
-          confirmPassword: "",
+          passwordConfirm: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values, actions) => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }}
+        onSubmit={handleRegister}
       >
         {({ errors, touched, values }) => (
           <Form>
             <FormHeader />
+            <UsernameInput errors={errors} touched={touched} />
             <EmailInput errors={errors} touched={touched} />
-            <PasswordInput values={values} errors={errors} touched={touched} />
-            <ConfirmPasswordInput errors={errors} touched={touched} />
+            <PasswordInput
+              values={values}
+              errors={errors}
+              touched={touched}
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+              passwordStrength={passwordStrength}
+              setPasswordStrength={setPasswordStrength}
+            />
+            <ConfirmPasswordInput
+              errors={errors}
+              touched={touched}
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+            />
             <ContinueButton />
             <FormFooter />
           </Form>
