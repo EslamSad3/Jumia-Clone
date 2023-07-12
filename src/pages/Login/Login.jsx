@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./Login.module.css"
+import "./Login.css"
 import logotop from "../../assets/imgs/validation/myjumia-top-logo.png";
 import logobottom from "../../assets/imgs/validation/myjumia-bottom-logo.png";
 import * as Yup from 'yup';
