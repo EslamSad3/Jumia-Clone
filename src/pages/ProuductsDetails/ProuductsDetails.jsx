@@ -3,7 +3,7 @@ import "./prouductsDetails.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-export default function ProductsDetails() {
+export default function ProductsDetails({userData}) {
 
   const {id} = useParams();
 
@@ -491,7 +491,7 @@ export default function ProductsDetails() {
                     <p className="my-1">جيد جدا</p>
 
                     <div className="d-flex justify-content-between">
-                      <p className="text-muted ">22-06-2023 by Ahmed</p>
+                      <p className="text-muted ">22-06-2023 by {userData ? `${userData}`:"Account"}</p>
                       <p className=" text-success">
                         {" "}
                         <i class="fa-solid fa-circle-check"></i> Verified
