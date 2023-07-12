@@ -78,7 +78,7 @@ const EmailInput = ({errors, touched }) => (
     style={{
       display: "flex",
       flexDirection: "column",
-      height: "72px", // Fixed height
+      height: "72px", 
     }}
   >
     <Field name="email">
@@ -131,7 +131,7 @@ const PasswordInput = ({errors, touched, showPassword, setShowPassword }) => {
               label="Password*"
               labelClass="mt-1"
               id="form2"
-              // type="password"
+             
               type={showPassword ? "text" : "password"}
               size="lg"
               style={{ height: "56px", boxSizing: "border-box" }}
@@ -168,7 +168,7 @@ const PasswordInput = ({errors, touched, showPassword, setShowPassword }) => {
 
 const LoginButton = () => {
 return (
-  <>
+    <>
     <MDBBtn
       className="mb-4 w-100 fw-bolder"
       style={{ backgroundColor: "#f8972d" }}
@@ -179,6 +179,11 @@ return (
     <div className="text-center">
       <a href="#!" className="mb-5 fw-bold" style={{ color: "#f8972d" }}>
         Forgot your password?
+      </a>
+    </div>
+    <div className="text-center mt-4">
+      <a href="/signup" className="mb-5 fw-bold" style={{ color: "#f8972d" }}>
+             Don't have an account? Sign up here
       </a>
     </div>
   </>
@@ -219,7 +224,7 @@ async function handleLogin(values, {setFieldError}) {
       
    if (response.status === 200) {
      localStorage.setItem('UserToken', response.data.token)
-    //  console.log(localStorage.getItem('userToken', response.data.token)); 
+
             saveUserData()
              navigate('/');
    }
@@ -228,7 +233,7 @@ async function handleLogin(values, {setFieldError}) {
        setFieldError("email", "Incorrect email or password");
        setFieldError("password", "Incorrect email or password");
       }
-  //  console.log(JSON.stringify(error.response.data, null, 2));
+
  }
 }
 return (
@@ -237,7 +242,6 @@ return (
  style={{ width: "432px" }}
 >
  <Formik
- // email: email
  initialValues={{ email:"" , password: '' }}
  validationSchema={validationSchema}
  onSubmit={handleLogin}>
