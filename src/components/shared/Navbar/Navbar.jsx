@@ -3,7 +3,7 @@ import "./Navbar.css"
 import logo from "../../../assets/imgs/logo.png";
 import { Link } from "react-router-dom";
 export default function Navbar({ userData }) {
-  function signOut(){
+  function signOut() {
     localStorage.removeItem("UserToken")
   }
   console.log(userData);
@@ -56,14 +56,14 @@ export default function Navbar({ userData }) {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <i class="fa-regular fa-user mx-2"></i>{userData ? `Hi, ${userData}`:"Account"}
+                  <i class="fa-regular fa-user mx-2"></i>{userData ? `Hi, ${userData}` : "Account"}
                 </a>
                 <div className="dropdown-menu align-items-center text-center ">
                   {userData ? <Link to="/signin">
-                    <button onClick={()=> signOut()} className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">
+                    <button onClick={() => signOut()} className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">
                       Sign Out
                     </button>
-                  </Link> :<Link to="/signin">
+                  </Link> : <Link to="/signin">
                     <button className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">
                       sign in
                     </button>

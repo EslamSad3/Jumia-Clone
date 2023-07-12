@@ -1,9 +1,6 @@
 import React from "react";
 import {
-  createBrowserRouter,
-  RouterProvider,
   Route,
-  Link,
   Routes,
 } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
@@ -15,30 +12,19 @@ import Cart from "../pages/Cart/Cart";
 import Registraion from "../pages/Registraion/Registraion";
 import Identification from "../pages/Identification/Identification";
 import NotFound from "../pages/NotFound/NotFound";
-import Products from "../components/Products/Products";
+import SearchProducts from "../components/Products/Products";
 
 function index({ userData, saveUserData }) {
   console.log(userData);
   return (
     <Routes>
       <Route element={<Layout userData={userData} />}>
-<<<<<<< HEAD
-        <Route path="/" element={<Home />} />
-        <Route path="/copmuting" element={<Copmuting />} />
-        {/* <Route path="/productdetails" element={<ProductsDetails />} /> */}
-        <Route path="/productdetails/:id" element={<ProductsDetails />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="*" element={<NotFound />} />
-=======
           <Route path="/" element={<Home />} />
           <Route path="/copmuting" element={<Copmuting />} />
-          {/* <Route path="/productdetails" element={<ProductsDetails />} /> */}
           <Route path="/productdetails/:id" element={<ProductsDetails userData={userData}/>} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/search" element={<SearchProducts/>} />
+          <Route path="/products" element={<SearchProducts/>} />
           <Route path="*" element={<NotFound />} />
->>>>>>> d40d20fdcf507a79fa5e83afcdc838c6b1a0a291
       </Route>
       <Route path="/signin" element={<Login saveUserData={saveUserData} />} />
       <Route path="/signup" element={<Registraion />} />
