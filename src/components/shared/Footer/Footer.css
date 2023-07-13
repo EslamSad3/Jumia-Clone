@@ -1,7 +1,7 @@
 /* footer */
 
 .logowite {
-  width: 140px;
+  width: 160px;
   height: 32px;
 }
 
@@ -20,4 +20,12 @@ a:hover {
 .join-ico:hover {
   color: var(--btn-color);
   cursor: pointer;
+}
+
+.font-s {
+  font-size: 13px;
+}
+.story-pay {
+  height: 55px;
+  text-align: center;
 }

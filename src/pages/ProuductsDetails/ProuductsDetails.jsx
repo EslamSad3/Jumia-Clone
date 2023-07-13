@@ -1,30 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./prouductsDetails.css";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import axios, { Axios } from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { cartContext } from "../../Context/CartContext";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import jwtDecode from "jwt-decode";
-import { Formik, useFormik } from "formik";
 
 export default function ProductsDetails() {
-  const [userData, setuserData] = useState(null);
-  function saveUserData() {
+  const navigate = useNavigate();
+
+  let { addToCart, setnumOfCartItems } = useContext(cartContext);
+
+  async function addProduct(id) {
+    if (localStorage.getItem("UserToken")) {
+      let response = await addToCart(id);
+      setnumOfCartItems(response.data.numOfCartItems);
+      console.log(response);
+    } else {
+      navigate("/signin");
+    }
+  }
+  const [errMessage, setErrMessage] = useState("");
+  const [usrid, setUsrId] = useState(null);
+
+  async function saveUserData() {
     let userlogintoken = localStorage.getItem("UserToken");
     if (userlogintoken) {
-      let decodedToken = jwtDecode(userlogintoken);
-      setuserData(decodedToken.userId);
+      let decodedToken = await jwtDecode(userlogintoken);
+
       console.log(decodedToken.userId);
+      setUsrId(decodedToken.userId);
+      review.user = decodedToken.userId;
     }
   }
   useEffect(() => {
     saveUserData();
   }, []);
 
+  const removeReview = (rev) => {
+    console.log(rev._id);
+    if (rev.user._id === usrid) {
+      axios
+        .delete(
+          `https://jumia-clone-api-9qqm.onrender.com/api/team2/reviews/${rev._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("UserToken")}`,
+            },
+          }
+        )
+        .then((res) => {
+          getproductDetails();
+        })
+        .catch((err) => {
+          setErrMessage("error");
+        });
+    } else {
+      console.log("This is not your review 😠");
+    }
+  };
+
   const { id } = useParams();
 
   const [prouductsDetails, setprouductsDetails] = useState(null);
 
   const [Reviews, setReviews] = useState([]);
-  
 
   async function getproductDetails() {
     try {
@@ -32,41 +73,59 @@ export default function ProductsDetails() {
         `https://jumia-clone-api-9qqm.onrender.com/api/team2/products/${id}`
       );
 
-      console.log(data);
+      // console.log(data);
       setprouductsDetails(data);
       setReviews(data.reviews);
-      console.log(Reviews);
+      // console.log(Reviews);
     } catch (error) {
       console.log("error:", error);
     }
   }
 
-  async function newreview(data) {
-    let res = await axios.post(`https://jumia-clone-api-9qqm.onrender.com/api/team2/reviews`, data,
-    { headers: { 'Authorization': `Bearer ${localStorage.getItem('UserToken')}` } }
-)
-console.log(res)
-    console.log(data);
+  function newreview(values) {
+    axios
+      .post(
+        `https://jumia-clone-api-9qqm.onrender.com/api/team2/reviews`,
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("UserToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        getproductDetails();
+      })
+      .catch((err) => {
+        setErrMessage("you are created a review before");
+      });
+    // console.log(`res ${res}`)
+    console.log(values);
+    // setReviews([...Reviews, res])
+  }
 
-  } 
+  let review = {
+    title: "",
+    user: "",
+    product: id,
+    ratings: "",
+  };
 
-
-let review = {
-  title:"",
-  rating:""
-};
- 
+  const validationSchema = Yup.object({
+    title: Yup.string()
+      .required("review is required")
+      .min(3, "review minLength is 3")
+      .max(50, "review maxLength is 50"),
+    ratings: Yup.number()
+      .required("rating is required")
+      .min(1, "rating minLength is 1")
+      .max(5, "rating maxLength is 5"),
+  });
 
   let myformik = useFormik({
-    initialValues:review,
-
-    onSubmit: function (values) {
-      const data = {
-        user:userData,product:id,...values
-       
-      }
-      newreview(data);
-    },
+    initialValues: review,
+    validationSchema: validationSchema,
+    onSubmit: newreview,
   });
 
   useEffect(function () {
@@ -80,7 +139,7 @@ let review = {
           <div className="bg-white container">
             <div className="row">
               <div className="col-md-9 ">
-                <div className="row  ">
+                <div className="row ">
                   <div className="col-md-4 ">
                     <img
                       className="w-100 pt-4 "
@@ -103,7 +162,7 @@ let review = {
                     </span>
                     <div className="pt-2"></div>
                     <span className="fw-bold ">
-                      AverageRating
+                      averageRating
                       <span>
                         &nbsp;&nbsp;
                         <a
@@ -128,16 +187,17 @@ let review = {
                     <p className="font12">
                       + shipping from EGP 10.83 to 6th of October
                     </p>
-                    <button className="bg-orange form-control w-100 py-2">
-                      <a
-                        className="text-white fw-bold text-decoration-none"
-                        href=""
+                    <div class=" mt-3 py-2">
+                      <button
+                        className="btn w-100 text-light"
+                        style={{ background: "#E07E1B" }}
+                        onClick={() => {
+                          addProduct(id);
+                        }}
                       >
-                        {" "}
-                        <i className="fa-solid fa-cart-plus px-2"></i> ADD TO
-                        CART{" "}
-                      </a>
-                    </button>
+                        Add to Cart
+                      </button>
+                    </div>
                     <hr className="m-2" />
                     <p className=" fw-semibold text-muted m-1">PROMOTIONS</p>
                     <i class="fa-solid fa-star star-icon"></i>
@@ -469,7 +529,12 @@ let review = {
                     </h6>
                   </div>
                   <div className="m-2">
-                    <button className="bg-orange form-control w-100 py-2">
+                    <button
+                      onClick={() => {
+                        addProduct(id);
+                      }}
+                      className="bg-orange form-control w-100 py-2"
+                    >
                       <a
                         className="text-white fw-bold text-decoration-none"
                         href=""
@@ -508,7 +573,6 @@ let review = {
 
                 <hr className="mt-1" />
 
-
                 <form onSubmit={myformik.handleSubmit}>
                   <label htmlFor="title">feedback </label>
 
@@ -516,24 +580,38 @@ let review = {
                     id="title"
                     onChange={myformik.handleChange}
                     value={myformik.values.title}
+                    onBlur={myformik.handleBlur}
                     type="title"
                     className="form-control my-1"
                     placeholder="write Review"
                   />
+                  {myformik.errors.title && myformik.touched.title ? (
+                    <div className="alert alert-danger w-25">
+                      {myformik.errors.title}
+                    </div>
+                  ) : null}
 
                   <label htmlFor="ratings">Rating </label>
                   <input
                     id="ratings"
                     onChange={myformik.handleChange}
+                    onBlur={myformik.handleBlur}
                     value={myformik.values.ratings}
                     type="number"
-                    
                     className="form-control my-1"
                     placeholder="rate proudct"
                   />
-              
+                  {myformik.errors.ratings && myformik.touched.ratings ? (
+                    <div className="alert alert-danger w-25">
+                      {myformik.errors.ratings}
+                    </div>
+                  ) : null}
 
-                  <button type="submit" className=" btn btn-warning my-2">
+                  <button
+                    type="submit"
+                    className=" btn btn-warning my-2"
+                    disabled={!(myformik.isValid && myformik.dirty)}
+                  >
                     Review
                   </button>
                 </form>
@@ -574,25 +652,41 @@ let review = {
                     {Reviews.length > 0 ? (
                       Reviews.map((rev, idx) => {
                         return (
-                          <>
-                            {" "}
-                            <div key={idx}>
+                          <div key={idx}>
+                            <div>
                               <p className="fw-bold pt-2">{rev.user.name}</p>
-                              <p className="my-1"> {rev.title}</p>
+                              <div className="d-flex justify-content-between w-50">
+                                <p className="my-1"> {rev.title}</p>
+
+                                {rev.user._id === usrid ? (
+                                  <button
+                                    onClick={() => {
+                                      removeReview(rev);
+                                    }}
+                                    className="btn "
+                                  >
+                                    <i className="fa-solid fa-trash fs-4"></i>
+                                  </button>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
                             </div>
                             <div className="d-flex justify-content-between">
                               <p className=" text-success">
-                                {" "}
-                                <i class="fa-solid fa-circle-check"></i>{" "}
+                                <i class="fa-solid fa-circle-check"></i>
                                 Verified Purchase
                               </p>
                             </div>
-                          </>
+                          </div>
                         );
                       })
                     ) : (
                       <p> no reviews for this product</p>
                     )}
+                    <div className="text-danger">
+                      {errMessage ? errMessage : ""}
+                    </div>
                   </div>
                 </div>
               </div>

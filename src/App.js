@@ -3,6 +3,7 @@ import Route from "../src/router/index";
 import { BrowserRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
+import { CartContextProvider } from "./Context/CartContext";
 
 function App() {
   const [userData, setuserData] = useState(null);
@@ -18,9 +19,11 @@ function App() {
     saveUserData();
   }, []);
   return (
-    <BrowserRouter>
-      <Route saveUserData={saveUserData} userData={userData} />
-    </BrowserRouter>
+    <CartContextProvider>
+      <BrowserRouter>
+        <Route saveUserData={saveUserData} userData={userData} />
+      </BrowserRouter>
+    </CartContextProvider>
   );
 }
 
