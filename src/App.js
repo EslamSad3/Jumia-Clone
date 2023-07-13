@@ -7,11 +7,15 @@ import { CartContextProvider } from "./Context/CartContext";
 
 function App() {
   const [userData, setuserData] = useState(null);
+  // const [usrId, setusrId] = useState(null);
   function saveUserData() {
     let userlogintoken = localStorage.getItem("UserToken");
     if (userlogintoken) {
       let decodedToken = jwtDecode(userlogintoken);
       setuserData(decodedToken.name);
+      // setusrId(decodedToken.userId);
+      console.log(decodedToken.userId);
+      console.log(decodedToken);
       // console.log(decodedToken);
     }
   }
