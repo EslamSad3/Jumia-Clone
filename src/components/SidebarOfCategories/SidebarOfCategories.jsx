@@ -1,7 +1,7 @@
 import React from 'react'
 import PriceRangeBar from '../PriceRangeBar/PriceRangeBar'
 import "./SidebarOfCategories.css"
-export default function SidebarOfCategories() {
+export default function SidebarOfCategories({ listFun }) {
     return (
         <div className="">
             <h6 className="text-uppercase my-3">category</h6>
@@ -37,7 +37,7 @@ export default function SidebarOfCategories() {
             <h6 className="text-uppercase my-3">express delivery</h6>
             <hr />
 
-            <PriceRangeBar />
+            <PriceRangeBar listFun={listFun} />
             <hr />
             <h6 className="text-uppercase my-3">shipped from</h6>
         </div>

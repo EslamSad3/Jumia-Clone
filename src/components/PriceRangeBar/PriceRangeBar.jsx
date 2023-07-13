@@ -2,10 +2,15 @@ import ReactSlider from "react-slider";
 import "./PriceRangeBar.css"
 import { useEffect, useState } from "react";
 
-const PriceRangeBar = () => {
+const PriceRangeBar = ({ listFun }) => {
     const [minValue, setMinValue] = useState(1);
-    const [maxValue, setMaxValue] = useState(5000);
+    const [maxValue, setMaxValue] = useState(20000);
     const [finaValue, setFinalValue] = useState([minValue, maxValue]);
+    async function productfilter(e) {
+
+        listFun(finaValue)
+
+    }
 
     console.log(`finaValue: ${finaValue}`);
     const minHandle = (e) => {
@@ -25,14 +30,14 @@ const PriceRangeBar = () => {
         <div>
             <span className="d-flex justify-content-between align-items-center ">
                 <h6 className="text-uppercase ">PRICE (EGP)</h6>
-                <button className="btn price-btn fw-medium ">Apply</button>
+                <button className="btn price-btn fw-medium " onClick={(e) => { productfilter(e) }}>Apply</button>
             </span>
             <ReactSlider
                 className="horizontal-slider"
                 thumbClassName="example-thumb"
                 trackClassName="example-track"
-                defaultValue={[1, 5000]}
-                max={5000}
+                defaultValue={[1, 20000]}
+                max={20000}
                 min={1}
                 value={[minValue, maxValue]}
                 // ariaLabel={["Lower thumb", "Upper thumb"]}
@@ -71,10 +76,10 @@ const PriceRangeBar = () => {
                     type="number"
                     placeholder="Max"
                     min="101"
-                    max="5000"
+                    max="20000"
                     onBlur={(e) => {
                         if (!e.target.value) {
-                            setMaxValue(5000);
+                            setMaxValue(20000);
                         }
                     }}
                     onChange={(e) => {

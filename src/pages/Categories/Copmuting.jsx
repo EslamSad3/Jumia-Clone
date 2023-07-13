@@ -1,110 +1,124 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Copmuting.css"
 import SidebarOfCategories from '../../components/SidebarOfCategories/SidebarOfCategories'
 import ProductList from '../../components/ProductList/ProductList'
+import axios from 'axios';
 
 export default function Copmuting() {
-    return <>
+    const [subCategories, setSubs] = useState([]);
+    const [rangePrice, setrangePrice] = useState([1, 20000])
+    const [brandsComputing, setBrandsComputing] = useState([]);
+    function listFun(argu) {
+        setrangePrice(argu)
+        // console.log(rangePrice)
+    }
 
+
+
+    useEffect(() => {
+        axios
+            .get(`https://jumia-clone-api-9qqm.onrender.com/api/team2/subcategories`
+            )
+            .then((res) => {
+                const subs = res.data.filter(elm => elm.category.name === "Computing")
+                console.log(subs)
+                setSubs(subs)
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }, []);
+    useEffect(() => {
+        axios
+            .get(`https://jumia-clone-api-9qqm.onrender.com/api/team2/brands?limit=20`
+            )
+            .then((res) => {
+                let myArray = ['HP', 'Dell', 'Lenovo', 'ASUS', 'Canon', 'AULA']
+                const selectedBrands = res.data.data.filter(brand => myArray.includes(brand.name));
+                // console.log(res.data.data)
+                setBrandsComputing(selectedBrands)
+
+
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }, []);
+
+    return <>
         <div className="container my-5">
             <div className="container text-center border shadow px-0">
                 <h4 className="p-2" style={{ background: "#FEE2CC" }}>
                     SHOP BY CATEGORY
                 </h4>
                 <div className="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-2 p-2">
-                    <div class="col">
-                        <a href="#" className="btn">
-                            <div class="card h-100">
-                                <img
-                                    src="https://eg.jumia.is/cms/JA-2022/UNs-Icons/Computing/Laptops__260_x_144_.png"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h6 class="card-title link">Laptops</h6>
+
+                    {
+                        subCategories.map((subCat, index) => {
+                            return (
+                                <div class="col" key={index}>
+                                    <a href="#" className="">
+                                        <div class="card h-100">
+                                            <img
+                                                src={subCat.image}
+                                                class="card-img-top"
+                                                alt="..."
+                                            />
+                                            <div class="card-body">
+                                                <h6 class="card-title link">{subCat.name}</h6>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="#" className="btn">
-                            <div class="card h-100">
-                                <img
-                                    src="https://eg.jumia.is/cms/JA-2022/UNs-Icons/Computing/-_Printers_&_Scanners_.png"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h6 class="card-title">Printers & Scanners</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="#" className="btn">
-                            <div class="card h-100">
-                                <img
-                                    src="https://eg.jumia.is/cms/JA-2022/UNs-Icons/Computing/Hard_drives_260_x_144_.png"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h6 class="card-title">Data Storage</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="#" className="btn">
-                            <div class="card h-100">
-                                <img
-                                    src="https://eg.jumia.is/cms/JA-2022/UNs-Icons/Computing/Access_points_260.png"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h6 class="card-title">Networking</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="#" className="btn">
-                            <div class="card h-100">
-                                <img
-                                    src="https://eg.jumia.is/cms/icons-21/260x144/phones/LaptopBags.png"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h6 class="card-title">Laptop Bags</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="#" className="btn">
-                            <div class="card h-100">
-                                <img
-                                    src="https://eg.jumia.is/cms/JA-2022/UNs-Icons/Computing/computer_accessories_260_x_144_copy_6.png"
-                                    class="card-img-top"
-                                    alt="..."
-                                />
-                                <div class="card-body">
-                                    <h6 class="card-title">Accessories</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+
+                            )
+                        })
+
+                    }
+
+
+
+
                 </div>
+
+            </div>
+            <div className="container text-center border shadow px-0 my-3">
+                <h4 className="p-2" style={{ background: "#FEE2CC" }}>
+                    SHOP BY BRAND
+                </h4>
+                <div className="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-2 p-2">
+
+                    {
+                        brandsComputing.map((subCat, index) => {
+                            return (
+                                <div class="col" key={index}>
+                                    <a href="#" className="">
+                                        <div class="card h-100">
+                                            <img
+                                                src={subCat.image}
+                                                class="card-img-top"
+                                                alt="..."
+                                            />
+
+                                        </div>
+                                    </a>
+                                </div>
+
+                            )
+                        })
+
+                    }
+
+                </div>
+
             </div>
             <div className="container">
                 <div className="row my-3 p-3 border shadow">
                     <div className="col-lg-3 d-lg-block d-none bg-light mx-0 p-8">
-                        <SidebarOfCategories />
+                        <SidebarOfCategories listFun={listFun} />
                     </div>
                     <div className="col-lg-9 col-12">
-                        <ProductList />
+                        <ProductList rangePr={rangePrice} />
                     </div>
                 </div>
             </div>

@@ -10,13 +10,16 @@ import axios from "axios";
 import Loader from "../Loader/Loader";
 import ProductCard from "../ProductCard/ProductCard";
 
-export default function ProductList() {
+export default function ProductList({ rangePr }) {
+
 
     const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState();
     const [productsList, setProducts] = useState([]);
+    // const [finalRange, setFinalRange] = useState(rangePr)
     // const navigate = useNavigate()
-
+    console.log(rangePr)
+    // console.log(finalRange)
     // const handleDetails = (id) => {
     //     navigate(`/product-details/${id}`)
     // }
@@ -25,25 +28,58 @@ export default function ProductList() {
         setPage(page);
     };
 
+
     useEffect(() => {
         setIsLoading(true)
         axios
-            .get(`https://api.themoviedb.org/3/movie/popular/`, {
+            .get(`https://jumia-clone-api-9qqm.onrender.com/api/team2/categories/64ac169f513cc89c46b1f9e9/products?limit=8&price[lte]=${rangePr[1]}&price[gte]=${rangePr[0]}`, {
                 params: {
-                    api_key: "c434411f1d306978a9d0e9b9b95ad354",
+
                     page: page
                 },
 
             })
             .then((res) => {
-                setProducts(res.data.results)
+                // console.log(res.data.Products)
+                // setProducts(res.data.Products)
+                // setIsLoading(false)
+                const computingProducts = res.data.Products.filter(elm => elm.category === "64ac169f513cc89c46b1f9e9")
+                console.log(computingProducts)
+                setProducts(computingProducts)
                 setIsLoading(false)
+
             })
             .catch((err) => {
                 console.log(err)
                 setIsLoading(false)
             });
-    }, [page]);
+    }, [page, rangePr]);
+
+
+
+
+
+
+
+    // useEffect(() => {
+    //     setIsLoading(true)
+    //     axios
+    //         .get(`https://api.themoviedb.org/3/movie/popular/`, {
+    //             params: {
+    //                 api_key: "c434411f1d306978a9d0e9b9b95ad354",
+    //                 page: page
+    //             },
+
+    //         })
+    //         .then((res) => {
+    //             setProducts(res.data.results)
+    //             setIsLoading(false)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //             setIsLoading(false)
+    //         });
+    // }, [page]);
     return (
         <div>
             {isLoading && <Loader />}
