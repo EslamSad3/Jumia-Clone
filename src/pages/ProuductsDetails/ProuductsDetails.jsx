@@ -2,12 +2,29 @@ import React, { useEffect, useState } from "react";
 import "./prouductsDetails.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import { Formik, useFormik } from "formik";
 
 export default function ProductsDetails() {
+  const [userData, setuserData] = useState(null);
+  function saveUserData() {
+    let userlogintoken = localStorage.getItem("UserToken");
+    if (userlogintoken) {
+      let decodedToken = jwtDecode(userlogintoken);
+      setuserData(decodedToken.userId);
+      console.log(decodedToken.userId);
+    }
+  }
+  useEffect(() => {
+    saveUserData();
+  }, []);
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   const [prouductsDetails, setprouductsDetails] = useState(null);
+
+  const [Reviews, setReviews] = useState([]);
+  
 
   async function getproductDetails() {
     try {
@@ -17,10 +34,40 @@ export default function ProductsDetails() {
 
       console.log(data);
       setprouductsDetails(data);
+      setReviews(data.reviews);
+      console.log(Reviews);
     } catch (error) {
       console.log("error:", error);
     }
   }
+
+  async function newreview(data) {
+    let res = await axios.post(`https://jumia-clone-api-9qqm.onrender.com/api/team2/reviews`, data,
+    { headers: { 'Authorization': `Bearer ${localStorage.getItem('UserToken')}` } }
+)
+console.log(res)
+    console.log(data);
+
+  } 
+
+
+let review = {
+  title:"",
+  rating:""
+};
+ 
+
+  let myformik = useFormik({
+    initialValues:review,
+
+    onSubmit: function (values) {
+      const data = {
+        user:userData,product:id,...values
+       
+      }
+      newreview(data);
+    },
+  });
 
   useEffect(function () {
     getproductDetails();
@@ -58,11 +105,13 @@ export default function ProductsDetails() {
                     <span className="fw-bold ">
                       averageRating
                       <span>
+                        &nbsp;&nbsp;
                         <a
                           href=""
-                          className=" text-decoration-none text-success"
+                          className=" text-decoration-none text-warning"
                         >
-                          ({prouductsDetails.averageRating})
+                          <i class="fa-solid fa-star star-icon"></i>(
+                          {prouductsDetails.averageRating})
                         </a>
                       </span>{" "}
                     </span>
@@ -454,22 +503,48 @@ export default function ProductsDetails() {
                   <p id="feedback" className="text-start fw-semibold m-0">
                     Verified Customer Feedback
                   </p>
-                  <p className="text-end m-0">
-                    <a
-                      className="text-warning fw-bold text-decoration-none "
-                      href=""
-                    >
-                      SEE ALL
-                    </a>
-                  </p>
+                  <p className="text-end m-0"></p>
                 </div>
+
                 <hr className="mt-1" />
+
+
+                <form onSubmit={myformik.handleSubmit}>
+                  <label htmlFor="title">feedback </label>
+
+                  <input
+                    id="title"
+                    onChange={myformik.handleChange}
+                    value={myformik.values.title}
+                    type="title"
+                    className="form-control my-1"
+                    placeholder="write Review"
+                  />
+
+                  <label htmlFor="ratings">Rating </label>
+                  <input
+                    id="ratings"
+                    onChange={myformik.handleChange}
+                    value={myformik.values.ratings}
+                    type="number"
+                    
+                    className="form-control my-1"
+                    placeholder="rate proudct"
+                  />
+              
+
+                  <button type="submit" className=" btn btn-warning my-2">
+                    Review
+                  </button>
+                </form>
 
                 <div className="row">
                   <div className="col-md-3">
-                    <p className="fw-semibold">VERIFIED RATINGS (2)</p>
+                    <p className="fw-semibold">VERIFIED RATINGS </p>
                     <div className="container  bg-light">
-                      <h1 className="text-center text-warning">5/5</h1>
+                      <h1 className="text-center text-warning">
+                        <span>{prouductsDetails.averageRating}</span>/5
+                      </h1>
                       <div className="text-center">
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
@@ -477,27 +552,47 @@ export default function ProductsDetails() {
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
                       </div>
-                      <p className="text-center">2 verified ratings</p>
+                      <p className="text-center">
+                        {prouductsDetails.ratingCount > 0 ? (
+                          <span>
+                            verified ratings {prouductsDetails.ratingCount}
+                          </span>
+                        ) : (
+                          " no rating yet"
+                        )}{" "}
+                      </p>
                     </div>
                   </div>
                   <div className="col-md-9">
-                    <p>PRODUCT REVIEWS (1)</p>
+                    <p>PRODUCT REVIEWS </p>
+                    {/* <i class="fa-solid fa-star star-icon"></i>
                     <i class="fa-solid fa-star star-icon"></i>
                     <i class="fa-solid fa-star star-icon"></i>
                     <i class="fa-solid fa-star star-icon"></i>
-                    <i class="fa-solid fa-star star-icon"></i>
-                    <i class="fa-solid fa-star star-icon"></i>
-                    <p className="fw-bold pt-2">جيد</p>
-                    <p className="my-1">جيد جدا</p>
+                    <i class="fa-solid fa-star star-icon"></i> */}
 
-                    <div className="d-flex justify-content-between">
-                      <p className="text-muted ">22-06-2023 by Ahmed</p>
-                      <p className=" text-success">
-                        {" "}
-                        <i class="fa-solid fa-circle-check"></i> Verified
-                        Purchase
-                      </p>
-                    </div>
+                    {Reviews.length > 0 ? (
+                      Reviews.map((rev, idx) => {
+                        return (
+                          <>
+                            {" "}
+                            <div key={idx}>
+                              <p className="fw-bold pt-2">{rev.user.name}</p>
+                              <p className="my-1"> {rev.title}</p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <p className=" text-success">
+                                {" "}
+                                <i class="fa-solid fa-circle-check"></i>{" "}
+                                Verified Purchase
+                              </p>
+                            </div>
+                          </>
+                        );
+                      })
+                    ) : (
+                      <p> no reviews for this product</p>
+                    )}
                   </div>
                 </div>
               </div>
