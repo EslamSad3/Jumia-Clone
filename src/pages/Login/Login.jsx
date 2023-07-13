@@ -117,7 +117,7 @@ const EmailInput = ({errors, touched }) => (
 const PasswordInput = ({errors, touched, showPassword, setShowPassword }) => {
   return (
     <div
-      className="input-group mb-5"
+      className="input-group mb-4"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -166,9 +166,18 @@ const PasswordInput = ({errors, touched, showPassword, setShowPassword }) => {
 };
 
 
-const LoginButton = () => {
+const LoginButton = ({isLoading}) => {
 return (
     <>
+    {isLoading?
+   <MDBBtn
+    className="mb-4 w-100 fw-bolder d-flex align-items-center justify-content-center"
+    style={{ backgroundColor: "#f8972d", height: '45px' }}
+    size="lg"
+  >
+  <div className="spinner-border text-light" role="status">
+</div>
+   </MDBBtn>:
     <MDBBtn
       className="mb-4 w-100 fw-bolder"
       style={{ backgroundColor: "#f8972d" }}
@@ -176,6 +185,7 @@ return (
     >
       Login
     </MDBBtn>
+}
     <div className="text-center">
       <a href="#!" className="mb-5 fw-bold" style={{ color: "#f8972d" }}>
         Forgot your password?
@@ -192,7 +202,7 @@ return (
 
 const FormFooter = () => (
   <div
-    className="text-center mt-5"
+    className="text-center mt-4"
     style={{
       fontSize: "14px",
       lineHeight: "24px",
@@ -217,16 +227,20 @@ const FormFooter = () => (
 function Login({saveUserData}) {
 
 const [showPassword, setShowPassword] = useState(false);
+const [isLoading, setIsLoading] = useState(false)
+
 const navigate =useNavigate()
 async function handleLogin(values, {setFieldError}) {
        try {
+      setIsLoading(true)
+
    const response = await axios.post('https://jumia-clone-api-9qqm.onrender.com/api/team2/auth/login', values);
       
    if (response.status === 200) {
+     setIsLoading(false)
      localStorage.setItem('UserToken', response.data.token)
-
-            saveUserData()
-             navigate('/');
+     saveUserData()
+     navigate('/');
    }
      } catch (error) {
         if (error.response.status === 401) {
@@ -250,7 +264,7 @@ return (
    <FormHeader />
    <EmailInput errors={errors} touched={touched} />
    <PasswordInput errors={errors} touched={touched} showPassword={showPassword} setShowPassword={setShowPassword} />
-   <LoginButton/>
+   <LoginButton setIsLoading={setIsLoading} isLoading={isLoading}/>
    <FormFooter />
    </Form>
   )}
