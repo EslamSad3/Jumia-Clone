@@ -71,7 +71,7 @@ export default function FlashSalCountDown() {
                             <div className="card border border-0">
                                 <img src={item.imageCover} alt="" className='' />
                                 <div className="card-body">
-                                    <p>{item.name}</p>
+                                    <p className='products-title'>{item.name}</p>
                                     <h4 className="card-title">EGP {item.price}</h4>
                                     <p className="card-text">25 Items Left</p>
                                     <div className="progress">
