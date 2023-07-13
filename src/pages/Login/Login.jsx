@@ -187,7 +187,7 @@ return (
     </MDBBtn>
 }
     <div className="text-center">
-      <a href="#!" className="mb-5 fw-bold" style={{ color: "#f8972d" }}>
+      <a href="/forgetpassword" className="mb-5 fw-bold" style={{ color: "#f8972d" }}>
         Forgot your password?
       </a>
     </div>
