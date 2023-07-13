@@ -80,7 +80,7 @@ let review = {
           <div className="bg-white container">
             <div className="row">
               <div className="col-md-9 ">
-                <div className="row ">
+                <div className="row  ">
                   <div className="col-md-4 ">
                     <img
                       className="w-100 pt-4 "
@@ -103,7 +103,7 @@ let review = {
                     </span>
                     <div className="pt-2"></div>
                     <span className="fw-bold ">
-                      averageRating
+                      AverageRating
                       <span>
                         &nbsp;&nbsp;
                         <a
