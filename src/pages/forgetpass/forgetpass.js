@@ -76,7 +76,7 @@ const Email = ({ errors, touched }) => (
       render={({ field }) => (
         <MDBInput
           wrapperClass="mb-1"
-          label="Email or Mobile Number*"
+          label="Email address*"
           labelClass="mt-1 "
           id="form1"
           type="text"

@@ -36,7 +36,7 @@ const ShowPasswordButton = ({ inputField, showPassword, showConfirmPassword, onC
       fontSize: "19px",
       position: "absolute",
       right: "10px",
-      top: inputField === "password" ? "calc(50% - 28px)" : "calc(50% - 22px)",
+      top: inputField === "password" ? "calc(50% - 14px)" : "calc(50% - 22px)",
       backgroundColor: "transparent",
       border: "none",
       cursor: "pointer",
@@ -97,7 +97,7 @@ const UsernameInput = ({ touched, errors }) => (
       {({ field }) => (
         <MDBInput
           wrapperClass="mb-1"
-          label="Username"
+          label="Username*"
           labelClass="mt-1"
           id="form3"
           type="text"
@@ -139,7 +139,7 @@ const EmailInput = ({ touched, errors }) => (
       {({ field }) => (
         <MDBInput
           wrapperClass="mb-1"
-          label="Email address"
+          label="Email address*"
           labelClass="mt-1"
           id="form1"
           type="email"
@@ -205,16 +205,17 @@ const PasswordInput = ({
 
   return (
     <div
-      className="input-group mb-4"
+      className="input-group mb-3"
       style={{
         display: "flex",
         flexDirection: "column",
         minHeight: "72px",
+        marginBottom: "16px"
       }}
     >
       <Field name="password">
         {({ field }) => (
-          <>
+          <div style={{ position: 'relative' }}>
             <MDBInput
               label="Password*"
               labelClass="mt-1"
@@ -232,12 +233,12 @@ const PasswordInput = ({
               onClick={() => setShowPassword(!showPassword)}
               inputField="password" 
             />
-          </>
+          </div>
         )}
       </Field>
-      <div style={{ height: "30px" }}>
+      <div style={{ height: errors.password && touched.password ? 'auto' : '24px' }}>
       {passwordStrength && (
-        <div className={`strength-bar ${passwordStrength} mb-1 mt-2`}>
+        <div className={`strength-bar ${passwordStrength} mb-1 mt-1`}>
           <div className="bar weak"></div>
           <div className="bar good"></div>
           <div className="bar strong"></div>
@@ -284,7 +285,7 @@ const ConfirmPasswordInput = ({
               wrapperClass="mb-1"
               label="Confirm Password*"
               labelClass="mt-1"
-              id="form3"
+              id="form4"
               type={showPassword ? "text" : "password"}
               size="lg"
               style={{ height: "56px", boxSizing: "border-box" }}
