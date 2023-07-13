@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import Home from "../pages/Home/Home";
@@ -11,10 +11,11 @@ import Registraion from "../pages/Registraion/Registraion";
 import Identification from "../pages/Identification/Identification";
 import NotFound from "../pages/NotFound/NotFound";
 import Products from "../components/Products/Products";
-
+import PrivateRoute from "./guard";
 
 function index({ userData, saveUserData }) {
   return (
+    <Fragment>
     <Routes>
       <Route element={<Layout userData={userData} />}>
         <Route path="/" element={<Home />} />
@@ -27,11 +28,12 @@ function index({ userData, saveUserData }) {
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="/products" element={<Products />} />
-      <Route path="/signin" element={<Login saveUserData={saveUserData} />} />
-      <Route path="/signup" element={<Registraion />} />
-      <Route path="/forgetpassword" element={<ForgetPass/>} />
-      <Route path="/identification" element={<Identification />} />
+       <Route path="/signin" element={<PrivateRoute> <Login saveUserData={saveUserData} /> </PrivateRoute>} />
+        <Route path="/signup" element={<PrivateRoute> <Registraion /> </PrivateRoute>} />
+      <Route path="/forgetpassword" element={<PrivateRoute><ForgetPass/></PrivateRoute>} />
+      <Route path="/identification" element={<PrivateRoute><Identification /></PrivateRoute>} />
     </Routes>
+    </Fragment>
   );
 }
 
