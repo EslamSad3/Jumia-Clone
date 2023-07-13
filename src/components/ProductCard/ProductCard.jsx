@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { cartContext } from "../../Context/CartContext";
 
 export default function ProductCard({ product }) {
+    let { addToCart, setnumOfCartItems } = useContext(cartContext)
+
+    async function addProduct(id) {
+        let response = await addToCart(id)
+        setnumOfCartItems(response.data.numOfCartItems)
+        console.log(response)
+    }
 
     const navigate = useNavigate()
 
@@ -33,6 +41,7 @@ export default function ProductCard({ product }) {
                 <button
                     className="btn w-100 text-light"
                     style={{ background: "#E07E1B" }}
+                    onClick={() => { addProduct(product._id) }}
                 >
                     Add to Cart
                 </button>

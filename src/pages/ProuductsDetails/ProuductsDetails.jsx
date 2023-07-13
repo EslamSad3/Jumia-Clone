@@ -1,13 +1,56 @@
 import React, { useEffect, useState } from "react";
 import "./prouductsDetails.css";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import { useParams } from "react-router-dom";
 
-export default function ProductsDetails({userData}) {
+import { useFormik } from "formik";
+import * as Yup from "yup"
+import jwtDecode from "jwt-decode";
 
-  const {id} = useParams();
+
+export default function ProductsDetails() {
+  const [errMessage, setErrMessage] = useState("")
+  const [usrid, setUsrId] = useState(null)
+
+  async function saveUserData() {
+    let userlogintoken = localStorage.getItem("UserToken");
+    if (userlogintoken) {
+      let decodedToken = await jwtDecode(userlogintoken);
+
+      console.log(decodedToken.userId);
+      setUsrId(decodedToken.userId)
+      review.user = decodedToken.userId
+    }
+  }
+  useEffect(() => {
+    saveUserData();
+  }, []);
+
+
+  const removeReview = (rev) => {
+    console.log(rev._id)
+    if (rev.user._id === usrid) {
+      axios.delete(`https://jumia-clone-api-9qqm.onrender.com/api/team2/reviews/${rev._id}`,
+        { headers: { 'Authorization': `Bearer ${localStorage.getItem('UserToken')}` } }
+      ).then((res) => { getproductDetails() }).catch((err) => { setErrMessage('error') })
+    }
+    else {
+      console.log("This is not your review 😠")
+    }
+
+
+  }
+
+
+
+
+  const { id } = useParams();
 
   const [prouductsDetails, setprouductsDetails] = useState(null);
+
+  const [Reviews, setReviews] = useState([]);
+
+
 
   async function getproductDetails() {
     try {
@@ -15,12 +58,49 @@ export default function ProductsDetails({userData}) {
         `https://jumia-clone-api-9qqm.onrender.com/api/team2/products/${id}`
       );
 
-      console.log(data);
+      // console.log(data);
       setprouductsDetails(data);
+      setReviews(data.reviews);
+      // console.log(Reviews);
     } catch (error) {
       console.log("error:", error);
     }
   }
+
+  function newreview(values) {
+    axios.post(`https://jumia-clone-api-9qqm.onrender.com/api/team2/reviews`, values,
+      { headers: { 'Authorization': `Bearer ${localStorage.getItem('UserToken')}` } }
+    ).then((res) => { getproductDetails() }).catch((err) => { setErrMessage('you are created a review before') })
+    // console.log(`res ${res}`)
+    console.log(values);
+    // setReviews([...Reviews, res])
+
+
+  }
+
+
+
+  let review = {
+    title: "",
+    user: "",
+    product: id,
+    ratings: "",
+  };
+
+  const validationSchema = Yup.object({
+    title: Yup.string().required("review is required").min(3, "review minLength is 3").max(50, "review maxLength is 50"),
+    ratings: Yup.number().required("rating is required").min(1, "rating minLength is 3").max(5, "rating maxLength is 5")
+
+  })
+
+
+
+  let myformik = useFormik({
+    initialValues: review,
+    validationSchema: validationSchema,
+    onSubmit: newreview
+
+  });
 
   useEffect(function () {
     getproductDetails();
@@ -58,11 +138,13 @@ export default function ProductsDetails({userData}) {
                     <span className="fw-bold ">
                       averageRating
                       <span>
+                        &nbsp;&nbsp;
                         <a
                           href=""
-                          className=" text-decoration-none text-success"
+                          className=" text-decoration-none text-warning"
                         >
-                          ({prouductsDetails.averageRating})
+                          <i class="fa-solid fa-star star-icon"></i>(
+                          {prouductsDetails.averageRating})
                         </a>
                       </span>{" "}
                     </span>
@@ -454,22 +536,51 @@ export default function ProductsDetails({userData}) {
                   <p id="feedback" className="text-start fw-semibold m-0">
                     Verified Customer Feedback
                   </p>
-                  <p className="text-end m-0">
-                    <a
-                      className="text-warning fw-bold text-decoration-none "
-                      href=""
-                    >
-                      SEE ALL
-                    </a>
-                  </p>
+                  <p className="text-end m-0"></p>
                 </div>
+
                 <hr className="mt-1" />
+
+
+                <form onSubmit={myformik.handleSubmit}>
+                  <label htmlFor="title">feedback </label>
+
+                  <input
+                    id="title"
+                    onChange={myformik.handleChange}
+                    value={myformik.values.title}
+                    onBlur={myformik.handleBlur}
+                    type="title"
+                    className="form-control my-1"
+                    placeholder="write Review"
+                  />
+                  {myformik.errors.title && myformik.touched.title ? <div className="alert alert-danger w-25">{myformik.errors.title}</div> : null}
+
+                  <label htmlFor="ratings">Rating </label>
+                  <input
+                    id="ratings"
+                    onChange={myformik.handleChange}
+                    onBlur={myformik.handleBlur}
+                    value={myformik.values.ratings}
+                    type="number"
+
+                    className="form-control my-1"
+                    placeholder="rate proudct"
+                  />
+                  {myformik.errors.ratings && myformik.touched.ratings ? <div className="alert alert-danger w-25">{myformik.errors.ratings}</div> : null}
+
+                  <button type="submit" className=" btn btn-warning my-2" disabled={!(myformik.isValid && myformik.dirty)}>
+                    Review
+                  </button>
+                </form>
 
                 <div className="row">
                   <div className="col-md-3">
-                    <p className="fw-semibold">VERIFIED RATINGS (2)</p>
+                    <p className="fw-semibold">VERIFIED RATINGS </p>
                     <div className="container  bg-light">
-                      <h1 className="text-center text-warning">5/5</h1>
+                      <h1 className="text-center text-warning">
+                        <span>{prouductsDetails.averageRating}</span>/5
+                      </h1>
                       <div className="text-center">
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
@@ -477,26 +588,61 @@ export default function ProductsDetails({userData}) {
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
                       </div>
-                      <p className="text-center">2 verified ratings</p>
+                      <p className="text-center">
+                        {prouductsDetails.ratingCount > 0 ? (
+                          <span>
+                            verified ratings {prouductsDetails.ratingCount}
+                          </span>
+                        ) : (
+                          " no rating yet"
+                        )}{" "}
+                      </p>
                     </div>
                   </div>
                   <div className="col-md-9">
-                    <p>PRODUCT REVIEWS (1)</p>
+                    <p>PRODUCT REVIEWS </p>
+                    {/* <i class="fa-solid fa-star star-icon"></i>
                     <i class="fa-solid fa-star star-icon"></i>
                     <i class="fa-solid fa-star star-icon"></i>
                     <i class="fa-solid fa-star star-icon"></i>
-                    <i class="fa-solid fa-star star-icon"></i>
-                    <i class="fa-solid fa-star star-icon"></i>
-                    <p className="fw-bold pt-2">جيد</p>
-                    <p className="my-1">جيد جدا</p>
+                    <i class="fa-solid fa-star star-icon"></i> */}
 
-                    <div className="d-flex justify-content-between">
-                      <p className="text-muted ">22-06-2023 by {userData ? `${userData}`:"Account"}</p>
-                      <p className=" text-success">
-                        {" "}
-                        <i class="fa-solid fa-circle-check"></i> Verified
-                        Purchase
-                      </p>
+                    {Reviews.length > 0 ? (
+                      Reviews.map((rev, idx) => {
+                        return (
+                          <div key={idx}>
+
+                            <div >
+                              <p className="fw-bold pt-2">{rev.user.name}</p>
+                              <div className="d-flex justify-content-between w-50">
+                                <p className="my-1"> {rev.title}</p>
+
+                                {
+                                  rev.user._id === usrid ? <button onClick={() => { removeReview(rev) }} className="btn "><i className="fa-solid fa-trash fs-4"></i></button>
+                                    : ""
+                                }
+
+
+
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <p className=" text-success">
+
+                                <i class="fa-solid fa-circle-check"></i>
+                                Verified Purchase
+                              </p>
+
+                            </div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p> no reviews for this product</p>
+                    )}
+                    <div className="text-danger">
+                      {errMessage ? errMessage : ""}
+
                     </div>
                   </div>
                 </div>
@@ -512,3 +658,14 @@ export default function ProductsDetails({userData}) {
     </>
   );
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Navbar.css"
 import logo from "../../../assets/imgs/logo.png";
 import { Link } from "react-router-dom";
+import { cartContext } from "../../../Context/CartContext";
 export default function Navbar({ userData }) {
+
+  let { numOfCartItems } = useContext(cartContext)
+
+
   function signOut() {
     localStorage.removeItem("UserToken")
   }
@@ -145,10 +150,13 @@ export default function Navbar({ userData }) {
                 </div>
               </li>
               <li>
-                <Link to="/cart">
-                  <span className="nav-link cart fw-bold">
-                    {" "}
+                <Link to="/testcart">
+                  <span className="nav-link cart fw-bold position-relative">
                     <i class="fa-solid fa-cart-shopping"></i> Cart
+                    <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+                      {numOfCartItems}
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
                   </span>
                 </Link>
               </li>
