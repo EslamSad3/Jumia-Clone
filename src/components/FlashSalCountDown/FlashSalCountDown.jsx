@@ -12,7 +12,7 @@ export default function FlashSalCountDown() {
         axios.get("https://jumia-clone-api-9qqm.onrender.com/api/team2/products").then(res => {
             // console.log(res.data.Products);    
             const allproducts = res.data.Products
-            console.log(allproducts);
+            // console.log(allproducts);
             setAllproducts(allproducts)
         })
     }, [])

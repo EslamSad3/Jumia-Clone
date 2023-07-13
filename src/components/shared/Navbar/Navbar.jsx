@@ -1,17 +1,24 @@
+<<<<<<< HEAD
 import React, { useContext } from "react";
 import "./Navbar.css"
 import logo from "../../../assets/imgs/logo.png";
 import { Link } from "react-router-dom";
 import { cartContext } from "../../../Context/CartContext";
+=======
+import React from "react";
+import "./Navbar.css";
+import logo from "../../../assets/imgs/logo.png";
+import { Link } from "react-router-dom";
+
+>>>>>>> master
 export default function Navbar({ userData }) {
 
   let { numOfCartItems } = useContext(cartContext)
 
 
   function signOut() {
-    localStorage.removeItem("UserToken")
+    localStorage.removeItem("UserToken");
   }
-  console.log(userData);
   return (
     <>
       <nav className="navbar navbar-expand-sm navbar-light bg-white">
@@ -29,14 +36,17 @@ export default function Navbar({ userData }) {
               <input
                 type="text"
                 className="form-control rounded-1"
-                placeholder="Search products, brands and categories"
+                placeholder="Search products"
               />
-              <button
-                className="btn rounded-1 search-btn fw-bold d-none d-md-block d-lg-block d-xl-block text-white my-2 mx-2 my-sm-0 text-uppercase px-3"
-                type="button"
-              >
-                search
-              </button>
+              <Link to="/products">
+                {" "}
+                <button
+                  className="btn rounded-1 search-btn fw-bold d-none d-md-block d-lg-block d-xl-block text-white my-2 mx-2 my-sm-0 text-uppercase px-3"
+                  type="button"
+                >
+                  search
+                </button>
+              </Link>
             </div>
           </form>
           <button
@@ -61,18 +71,26 @@ export default function Navbar({ userData }) {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <i class="fa-regular fa-user mx-2"></i>{userData ? `Hi, ${userData}` : "Account"}
+                  <i class="fa-regular fa-user mx-2"></i>
+                  {userData ? `Hi, ${userData}` : "Account"}
                 </a>
                 <div className="dropdown-menu align-items-center text-center ">
-                  {userData ? <Link to="/signin">
-                    <button onClick={() => signOut()} className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">
-                      Sign Out
-                    </button>
-                  </Link> : <Link to="/signin">
-                    <button className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">
-                      sign in
-                    </button>
-                  </Link>}
+                  {userData ? (
+                    <Link to="/signin">
+                      <button
+                        onClick={() => signOut()}
+                        className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase"
+                      >
+                        Sign Out
+                      </button>
+                    </Link>
+                  ) : (
+                    <Link to="/signin">
+                      <button className="btn sign-in-btn fw-bold w-75 text-white text-bold mb-1 mt-1 text-uppercase">
+                        sign in
+                      </button>
+                    </Link>
+                  )}
                   <hr />
                   <a
                     className="dropdown-item text-start"
