@@ -320,14 +320,25 @@ const ConfirmPasswordInput = ({
   );
 };
 
-const ContinueButton = () => (
-  <MDBBtn
-    className="mb-1 w-100 fw-bolder"
+const ContinueButton = ({isLoading}) => (
+  <>
+  {isLoading?
+ <MDBBtn
+ className="mb-3 w-100 fw-bolder d-flex align-items-center justify-content-center"
+ style={{ backgroundColor: "#f8972d", height: '45px' }}
+ size="lg"
+>
+<div className="spinner-border text-light" role="status">
+</div>
+</MDBBtn>:
+   <MDBBtn
+    className="mb-3 w-100 fw-bolder"
     style={{ backgroundColor: "#f8972d" }}
     size="lg"
   >
     Continue
-  </MDBBtn>
+      </MDBBtn> }
+      </>
 );
 
 const FormFooter = () => (
@@ -358,13 +369,16 @@ function Registration() {
   const [passwordStrength, setPasswordStrength] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
-  async function handleRegister(values, { setFieldError }) {
+  async function handleRegister(values, {setFieldError}) {
     try {
+      setIsLoading(true)
       const response = await axios.post('https://jumia-clone-api-9qqm.onrender.com/api/team2/auth/signup', values);
       console.log(response);
       if (response.status === 201) {
-        navigate("/signin");
+      setIsLoading(false)
+      navigate("/signin");
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -407,7 +421,7 @@ function Registration() {
               showPassword={showConfirmPassword}
               setShowPassword={setShowConfirmPassword}
             />
-            <ContinueButton />
+            <ContinueButton setIsLoading={setIsLoading} isLoading={isLoading}  />
             <FormFooter />
           </Form>
         )}
