@@ -1,30 +1,11 @@
-<<<<<<< HEAD
 import React, { useContext } from "react";
-=======
-<<<<<<< HEAD
-import React, { useContext } from "react";
-import "./Navbar.css"
-import logo from "../../../assets/imgs/logo.png";
-import { Link } from "react-router-dom";
-import { cartContext } from "../../../Context/CartContext";
-=======
-import React from "react";
->>>>>>> bb7ebe19561af8574db9a1783fd86e039101afed
 import "./Navbar.css";
 import logo from "../../../assets/imgs/logo.png";
 import { Link } from "react-router-dom";
 import { cartContext } from "../../../Context/CartContext";
 
->>>>>>> master
 export default function Navbar({ userData }) {
-<<<<<<< HEAD
   let { numOfCartItems } = useContext(cartContext)
-=======
-
-  let { numOfCartItems } = useContext(cartContext)
-
-
->>>>>>> bb7ebe19561af8574db9a1783fd86e039101afed
   function signOut() {
     localStorage.removeItem("UserToken");
   }
