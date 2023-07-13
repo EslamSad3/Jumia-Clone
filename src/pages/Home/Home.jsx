@@ -61,7 +61,7 @@ export default function Home() {
         axios.get("https://jumia-clone-api-9qqm.onrender.com/api/team2/products?limit=3").then(res => {
             // console.log(res.data.Products);    
             const prodata = res.data.Products
-            console.log(prodata);
+            // console.log(prodata);
             setproducts(prodata)
         })
     }, [])

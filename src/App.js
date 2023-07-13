@@ -11,7 +11,7 @@ function App() {
     if (userlogintoken) {
       let decodedToken = jwtDecode(userlogintoken);
       setuserData(decodedToken.name);
-      console.log(decodedToken);
+      // console.log(decodedToken);
     }
   }
   useEffect(() => {
