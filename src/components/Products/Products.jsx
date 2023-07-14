@@ -7,6 +7,11 @@ import Banner from "../shared/Banner/Banner";
 import Footer from "../shared/Footer/Footer";
 import PaginationComponent from "../Pagination/Pagination";
 function Products() {
+  const [rangePrice, setrangePrice] = useState([1, 20000]);
+  function listFun(argu) {
+    setrangePrice(argu);
+    // console.log(`rangePrice`)
+  }
   const [products, setproducts] = useState([]);
   const [searchField, setSearchField] = useState("");
   const [page, setPage] = useState();
@@ -16,7 +21,7 @@ function Products() {
   useEffect(() => {
     axios
       .get(
-        "https://jumia-clone-api-9qqm.onrender.com/api/team2/products?limit=8",
+        `https://jumia-clone-api-9qqm.onrender.com/api/team2/products?limit=8&price[lte]=${rangePrice[1]}&price[gte]=${rangePrice[0]}`,
         {
           params: {
             page: page,
@@ -27,7 +32,8 @@ function Products() {
         const prodata = res.data.Products;
         setproducts(prodata);
       });
-  }, [page]);
+  }, [page, rangePrice]);
+
   const handleChange = (e) => {
     setSearchField(e.target.value);
   };
@@ -54,9 +60,8 @@ function Products() {
             search
           </button>
         </div>
-
         <div className="col-2 d-none d-md-block d-lg-block d-xl-block">
-          <ProductsSideBar />
+          <ProductsSideBar listFun={listFun} />
         </div>
         <div className="col-xs-4 col-md-8 col-lg-8 col-xl-10   my-4 p-3 bg-white">
           <div>
