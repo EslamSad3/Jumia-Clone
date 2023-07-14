@@ -25,7 +25,7 @@ function index({ userData, saveUserData }) {
             path="/productdetails/:id"
             element={<ProductsDetails userData={userData} />}
           />
-          <Route path="/testcart" element={<TestCart />} />
+          <Route path="/cart" element={<TestCart />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="/products" element={<Products />} />
