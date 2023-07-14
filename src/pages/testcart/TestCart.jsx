@@ -67,7 +67,7 @@ export default function TestCart() {
   }, []);
   return (
     <>
-      {isLoading && <Loader /> ? (
+      {isLoading && localStorage.getItem('UserToken') ? (
         <Loader />
       ) : (
         <div>
