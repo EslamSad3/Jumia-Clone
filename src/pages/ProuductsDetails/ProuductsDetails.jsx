@@ -18,7 +18,7 @@ export default function ProductsDetails() {
       let response = await addToCart(id);
       setnumOfCartItems(response.data.numOfCartItems);
       console.log(response);
-      toast(response.data.message, { duration: 2000, position: "top-center" })
+      toast(response.data.message, { duration: 2000, position: "top-center" })
 
     } else {
       navigate("/signin");
@@ -55,6 +55,7 @@ export default function ProductsDetails() {
         )
         .then((res) => {
           getproductDetails();
+          setErrMessage("")
         })
         .catch((err) => {
           setErrMessage("error");
