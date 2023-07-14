@@ -5,19 +5,21 @@ import Loader from "../../components/Loader/Loader";
 
 export default function TestCart() {
   const [isLoading, setIsLoading] = useState(false);
-  let { updateProductCount, removeItem, getLoggedUserCart, setnumOfCartItems } =
+  let { updateProductCount, removeItem, getLoggedUserCart, setnumOfCartItems, removeCart } =
     useContext(cartContext);
   const [cartDetails, setcartDetails] = useState(null);
 
   async function getCart() {
+
     let res = await getLoggedUserCart();
+    setIsLoading(false);
     if (res?.data?.status === "success") {
       if (res.data.numOfCartItems === 0) {
-        setIsLoading(false);
+
 
         setcartDetails(null);
       } else {
-        setIsLoading(false);
+
 
         setcartDetails(res.data.data);
         setnumOfCartItems(res.data.numOfCartItems);
@@ -40,6 +42,19 @@ export default function TestCart() {
       }
       console.log(res.data.data);
     }
+  }
+  async function deleteCart() {
+
+    let res = await removeCart();
+    console.log(res)
+    if (res?.status === 204) {
+      setIsLoading(false);
+      setcartDetails(null);
+      setnumOfCartItems(0);
+    }
+
+    console.log(res.data.data);
+
   }
 
   async function updateQuantity(id, count) {
@@ -67,13 +82,22 @@ export default function TestCart() {
   }, []);
   return (
     <>
-      {isLoading && localStorage.getItem('UserToken') ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <div>
           {cartDetails !== null ? (
             <div className="bg-main-light p-4 my-4">
               <h3>Shop Cart: </h3>
+              <button
+                onClick={() => {
+                  deleteCart();
+                }}
+                className="btn btn-primary my-3"
+              >
+                <i class="fa-solid fa-trash mx-2"></i>
+                Empty Cart
+              </button>
               <h6 className="text-danger">
                 Total Cart Price: {cartDetails.totalCartPrice} EGP
               </h6>

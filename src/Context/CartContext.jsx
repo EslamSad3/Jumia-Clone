@@ -67,8 +67,14 @@ export function CartContextProvider(props) {
     }
 
 
+    function removeCart() {
+        return axios.delete(`https://jumia-clone-api-9qqm.onrender.com/api/team2/cart`,
+            { headers: { 'Authorization': headers.token } }
+        ).then((res) => res).catch((err) => err)
+    }
 
-    return <cartContext.Provider value={{ addToCart, getLoggedUserCart, removeItem, updateProductCount, numOfCartItems, setnumOfCartItems }}>
+
+    return <cartContext.Provider value={{ addToCart, getLoggedUserCart, removeItem, updateProductCount, numOfCartItems, setnumOfCartItems, removeCart }}>
         {props.children}
     </cartContext.Provider>
 }
