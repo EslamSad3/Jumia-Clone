@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { cartContext } from "../../Context/CartContext";
+import { toast } from "react-hot-toast";
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function ProductCard({ product }) {
       let response = await addToCart(id);
       setnumOfCartItems(response.data.numOfCartItems);
       console.log(response);
+      toast(response.data.message, { duration: 2000, position: "top-center" })
     } else {
       navigate("/signin");
     }

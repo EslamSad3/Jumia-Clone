@@ -6,6 +6,7 @@ import { cartContext } from "../../Context/CartContext";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import jwtDecode from "jwt-decode";
+import { toast } from "react-hot-toast";
 
 export default function ProductsDetails() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ export default function ProductsDetails() {
       let response = await addToCart(id);
       setnumOfCartItems(response.data.numOfCartItems);
       console.log(response);
+      toast(response.data.message, { duration: 2000, position: "top-center" })
+
     } else {
       navigate("/signin");
     }
