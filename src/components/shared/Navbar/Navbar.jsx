@@ -89,13 +89,10 @@ export default function Navbar({ userData }) {
                     {" "}
                     <i class="fa-regular fa-user "></i> My Account
                   </a>
-                  <a
-                    className="dropdown-item text-start"
-                    href="https://www.google.com"
-                  >
+                  <Link className="dropdown-item text-start" to="/orders">
                     {" "}
                     <i class="fa-solid fa-bag-shopping "></i> Orders
-                  </a>
+                  </Link>
                   <a
                     className="dropdown-item text-start"
                     href="https://www.google.com"
