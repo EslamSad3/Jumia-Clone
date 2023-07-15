@@ -102,7 +102,7 @@ export default function TestCart() {
                 Total Cart Price: {cartDetails.totalCartPrice} EGP
               </h6>
               {cartDetails.cartItems.map((item, index) => (
-                <div className="row align-items-center border-bottom py-2">
+                <div className="row align-items-center border-bottom py-2 w-75">
                   <div className="col-md-1">
                     <img src={item.imageCover} alt="" className="w-100" />
                   </div>
@@ -141,6 +141,15 @@ export default function TestCart() {
                   </div>
                 </div>
               ))}
+
+              <button className="btn bg-main my-3">
+                <Link to={'/checkout'}>
+                  checkout
+                </Link>
+
+              </button>
+
+
             </div>
           ) : (
             <div>

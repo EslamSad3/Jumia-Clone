@@ -13,6 +13,8 @@ import NotFound from "../pages/NotFound/NotFound";
 import Products from "../components/Products/Products";
 import PrivateRoute from "./guard";
 import TestCart from "../pages/testcart/TestCart";
+import Checkout from "../pages/checkout/Checkout";
+import Orders from "../pages/orders/Orders";
 
 function index({ userData, saveUserData }) {
   return (
@@ -26,6 +28,8 @@ function index({ userData, saveUserData }) {
             element={<ProductsDetails userData={userData} />}
           />
           <Route path="/cart" element={<TestCart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/orders" element={<Orders />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="/products" element={<Products />} />

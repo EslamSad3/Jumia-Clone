@@ -6,7 +6,7 @@ export let cartContext = createContext()
 
 export function CartContextProvider(props) {
 
-    const [cardId, setcardId] = useState(null)
+
     const [numOfCartItems, setnumOfCartItems] = useState(0)
 
     async function getCart() {
@@ -15,8 +15,9 @@ export function CartContextProvider(props) {
 
             setnumOfCartItems(res.data.numOfCartItems)
 
+
+            // console.log(res.data.data)
         }
-        // console.log(res.data.data)
 
 
     }
@@ -65,6 +66,13 @@ export function CartContextProvider(props) {
             { headers: { 'Authorization': headers.token } }
         ).then((res) => res).catch((err) => err)
     }
+    function onlinePayment(cartId, shippingAdrdress) {
+        return axios.post(`https://ali-service-ey1c.onrender.com/api/team2/orders/checkout-session/${cartId}`, {
+            shippingAdrdress: shippingAdrdress
+        },
+            { headers: { 'Authorization': headers.token } }
+        ).then((res) => res).catch((err) => err)
+    }
 
 
     function removeCart() {
@@ -74,7 +82,7 @@ export function CartContextProvider(props) {
     }
 
 
-    return <cartContext.Provider value={{ addToCart, getLoggedUserCart, removeItem, updateProductCount, numOfCartItems, setnumOfCartItems, removeCart }}>
+    return <cartContext.Provider value={{ onlinePayment, addToCart, getLoggedUserCart, removeItem, updateProductCount, numOfCartItems, setnumOfCartItems, removeCart }}>
         {props.children}
     </cartContext.Provider>
 }
