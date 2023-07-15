@@ -36,8 +36,8 @@ export function CartContextProvider(props) {
         token: `Bearer ${localStorage.getItem('UserToken')}`
     }
 
-    function addToCart(productId) {
-        return axios.post(`https://jumia-clone-api-9qqm.onrender.com/api/team2/cart`,
+    async function addToCart(productId) {
+        return await axios.post(`https://ali-service-ey1c.onrender.com/api/team2/cart`,
             {
                 productId: productId
 
@@ -47,27 +47,27 @@ export function CartContextProvider(props) {
         ).then((res) => res).catch((err) => err)
     }
 
-    function getLoggedUserCart() {
-        return axios.get(`https://jumia-clone-api-9qqm.onrender.com/api/team2/cart`,
+    async function getLoggedUserCart() {
+        return await axios.get(`https://ali-service-ey1c.onrender.com/api/team2/cart`,
 
             { headers: { 'Authorization': headers.token } }
         ).then((res) => res).catch((err) => err)
     }
 
-    function removeItem(productId) {
-        return axios.delete(`https://jumia-clone-api-9qqm.onrender.com/api/team2/cart/${productId}`,
+    async function removeItem(productId) {
+        return await axios.delete(`https://ali-service-ey1c.onrender.com/api/team2/cart/${productId}`,
             { headers: { 'Authorization': headers.token } }
         ).then((res) => res).catch((err) => err)
     }
-    function updateProductCount(productId, quantity) {
-        return axios.put(`https://jumia-clone-api-9qqm.onrender.com/api/team2/cart/${productId}`, {
+    async function updateProductCount(productId, quantity) {
+        return await axios.put(`https://ali-service-ey1c.onrender.com/api/team2/cart/${productId}`, {
             quantity: quantity
         },
             { headers: { 'Authorization': headers.token } }
         ).then((res) => res).catch((err) => err)
     }
-    function onlinePayment(cartId, shippingAdrdress) {
-        return axios.post(`https://ali-service-ey1c.onrender.com/api/team2/orders/checkout-session/${cartId}`, {
+    async function onlinePayment(cartId, shippingAdrdress) {
+        return await axios.post(`https://ali-service-ey1c.onrender.com/api/team2/orders/checkout-session/${cartId}`, {
             shippingAdrdress: shippingAdrdress
         },
             { headers: { 'Authorization': headers.token } }
@@ -75,8 +75,8 @@ export function CartContextProvider(props) {
     }
 
 
-    function removeCart() {
-        return axios.delete(`https://jumia-clone-api-9qqm.onrender.com/api/team2/cart`,
+    async function removeCart() {
+        return await axios.delete(`https://ali-service-ey1c.onrender.com/api/team2/cart`,
             { headers: { 'Authorization': headers.token } }
         ).then((res) => res).catch((err) => err)
     }

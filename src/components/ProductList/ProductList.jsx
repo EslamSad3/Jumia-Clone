@@ -32,7 +32,7 @@ export default function ProductList({ rangePr }) {
     useEffect(() => {
         setIsLoading(true)
         axios
-            .get(`https://jumia-clone-api-9qqm.onrender.com/api/team2/categories/64ac169f513cc89c46b1f9e9/products?limit=8&price[lte]=${rangePr[1]}&price[gte]=${rangePr[0]}`, {
+            .get(`https://ali-service-ey1c.onrender.com/api/team2/categories/64ac169f513cc89c46b1f9e9/products?limit=8&price[lte]=${rangePr[1]}&price[gte]=${rangePr[0]}`, {
                 params: {
 
                     page: page
@@ -57,29 +57,6 @@ export default function ProductList({ rangePr }) {
 
 
 
-
-
-
-
-    // useEffect(() => {
-    //     setIsLoading(true)
-    //     axios
-    //         .get(`https://api.themoviedb.org/3/movie/popular/`, {
-    //             params: {
-    //                 api_key: "c434411f1d306978a9d0e9b9b95ad354",
-    //                 page: page
-    //             },
-
-    //         })
-    //         .then((res) => {
-    //             setProducts(res.data.results)
-    //             setIsLoading(false)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //             setIsLoading(false)
-    //         });
-    // }, [page]);
     return (
         <div>
             {isLoading && <Loader />}

@@ -46,7 +46,7 @@ export default function ProductsDetails() {
     if (rev.user._id === usrid) {
       axios
         .delete(
-          `https://jumia-clone-api-9qqm.onrender.com/api/team2/reviews/${rev._id}`,
+          `https://ali-service-ey1c.onrender.com/api/team2/reviews/${rev._id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("UserToken")}`,
@@ -74,7 +74,7 @@ export default function ProductsDetails() {
   async function getproductDetails() {
     try {
       const { data } = await axios.get(
-        `https://jumia-clone-api-9qqm.onrender.com/api/team2/products/${id}`
+        `https://ali-service-ey1c.onrender.com/api/team2/products/${id}`
       );
 
       // console.log(data);
@@ -89,7 +89,7 @@ export default function ProductsDetails() {
   function newreview(values) {
     axios
       .post(
-        `https://jumia-clone-api-9qqm.onrender.com/api/team2/reviews`,
+        `https://ali-service-ey1c.onrender.com/api/team2/reviews`,
         values,
         {
           headers: {

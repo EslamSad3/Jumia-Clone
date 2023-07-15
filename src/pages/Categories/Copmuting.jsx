@@ -17,7 +17,7 @@ export default function Copmuting() {
 
     useEffect(() => {
         axios
-            .get(`https://jumia-clone-api-9qqm.onrender.com/api/team2/subcategories`
+            .get(`https://ali-service-ey1c.onrender.com/api/team2/subcategories`
             )
             .then((res) => {
                 const subs = res.data.filter(elm => elm.category.name === "Computing")
@@ -30,7 +30,7 @@ export default function Copmuting() {
     }, []);
     useEffect(() => {
         axios
-            .get(`https://jumia-clone-api-9qqm.onrender.com/api/team2/brands?limit=20`
+            .get(`https://ali-service-ey1c.onrender.com/api/team2/brands?limit=20`
             )
             .then((res) => {
                 let myArray = ['HP', 'Dell', 'Lenovo', 'ASUS', 'Canon', 'AULA']
