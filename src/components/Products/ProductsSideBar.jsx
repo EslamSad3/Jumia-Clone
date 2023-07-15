@@ -1,7 +1,9 @@
 import React from 'react'
 import "./ProductsSideBar.css"
 import { Link } from 'react-router-dom'
-function ProductsSideBar() {
+import PriceRangeBar from '../PriceRangeBar/PriceRangeBar'
+function ProductsSideBar({listFun}) {
+    console.log(listFun)
     return (
         <div className='cat-sidebar my-4 p-3 bg-white'>
             <div>
@@ -38,14 +40,15 @@ function ProductsSideBar() {
             </div>
             <hr />
             <div>
-                <div className='d-flex justify-content-between'>
+                {/* <div className='d-flex justify-content-between'>
                     <div><h4>PRICE (EGP)</h4></div>
                     <div><p className='text-warning fw-bolder cursor-pointer'>APPLAY</p></div>
                 </div>
                 <div>
                     <input type="range" className="form-range" min="0" max="99999999" id="customRange2" />
                     <input type="number" className="" min="0" max="99999999" id="customRange2" value="6254" /> -  <input type="number" className="" min="0" max="99999999" id="customRange2" value="6254" />
-                </div>
+                </div> */}
+                <PriceRangeBar listFun={listFun} />
             </div>
             <hr />
             <div>
