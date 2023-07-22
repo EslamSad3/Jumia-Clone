@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import toast, { Toaster } from "react-hot-toast";
 import { CartContextProvider } from "./Context/CartContext";
+import { ProductsContextProvider } from "./Context/ProductsContext";
 
 function App() {
   const [userData, setuserData] = useState(null);
@@ -20,12 +21,14 @@ function App() {
     saveUserData();
   }, []);
   return (
-    <CartContextProvider>
-      <Toaster/>
-      <BrowserRouter>
-        <Route saveUserData={saveUserData} userData={userData} />
-      </BrowserRouter>
-    </CartContextProvider>
+    <ProductsContextProvider>
+      <CartContextProvider>
+        <Toaster />
+        <BrowserRouter>
+          <Route saveUserData={saveUserData} userData={userData} />
+        </BrowserRouter>
+      </CartContextProvider>
+    </ProductsContextProvider>
   );
 }
 
