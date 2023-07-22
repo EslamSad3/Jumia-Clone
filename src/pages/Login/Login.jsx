@@ -234,7 +234,7 @@ async function handleLogin(values, {setFieldError}) {
        try {
       setIsLoading(true)
 
-   const response = await axios.post('https://jumia-clone-api-9qqm.onrender.com/api/team2/auth/login', values);
+   const response = await axios.post('https://ali-service-ey1c.onrender.com/api/team2/auth/login', values);
       
    if (response.status === 200) {
      setIsLoading(false)
