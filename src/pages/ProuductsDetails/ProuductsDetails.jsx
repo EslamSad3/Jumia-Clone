@@ -167,7 +167,7 @@ export default function ProductsDetails() {
                     </span>
                     <div className="pt-2"></div>
                     <span className="fw-bold ">
-                      averageRating
+                      Rating
                       <span>
                         &nbsp;&nbsp;
                         <a
