@@ -245,7 +245,16 @@ async function handleLogin(values, {setFieldError}) {
      setIsLoading(false)
      localStorage.setItem('UserToken', response.data.token)
      saveUserData()
-     navigate('/');
+      const role = response.data.data.role;
+     console.log(role) // get the role from the response
+      if (role === 'admin') {
+        navigate('/admin'); // navigate to admin route
+      } else if (role === 'seller') {
+        navigate('/seller'); // navigate to user route
+      } else {
+        navigate('/'); // default route
+      }
+    
    }
      } catch (error) {
         if (error.response.status === 401) {
