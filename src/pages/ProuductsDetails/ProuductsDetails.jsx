@@ -96,7 +96,8 @@ export default function ProductsDetails() {
             Authorization: `Bearer ${localStorage.getItem("UserToken")}`,
           },
         }
-      )
+
+              )
       .then((res) => {
         getproductDetails();
       })
@@ -256,9 +257,7 @@ export default function ProductsDetails() {
                         {" "}
                         Giza
                       </option>
-                      <option value="option2">cairo</option>
-                      <option value="option3">Minya</option>
-                      <option value="option3">Fayoum</option>
+                   
                     </select>
                   </label>
 
@@ -268,8 +267,7 @@ export default function ProductsDetails() {
                         {" "}
                         6th of october
                       </option>
-                      <option value="option2">al ayat</option>
-                      <option value="option3">al wahat</option>
+                  
                     </select>
                   </label>
                 </div>
@@ -286,7 +284,7 @@ export default function ProductsDetails() {
                     </p>
                     <p className="m-0 font12">Delivery EGP 22.23</p>
                     <p className="font12">
-                      Ready for delivery between 05 July & 06 July when you
+                      Ready for delivery between 25 July & 26 July when you
                       order within next 3hrs 56mins
                     </p>
                   </div>
@@ -304,7 +302,7 @@ export default function ProductsDetails() {
                     </p>
                     <p className="m-0 font12">Delivery EGP 22.23</p>
                     <p className="font12">
-                      Ready for delivery between 05 July & 06 July when you
+                      Ready for delivery between 25 July & 26 July when you
                       order within next 3hrs 56mins
                     </p>
                   </div>
@@ -416,7 +414,7 @@ export default function ProductsDetails() {
                 <div className="row  px-3 py-2   justify-content-center">
                   <div className="col-lg-5">
                     <table
-                      className="w-100 h-100"
+                      className="w-100 h-auto"
                       style={{ border: "1px solid rgb(156, 152, 152)" }}
                     >
                       <thead>
@@ -440,17 +438,10 @@ export default function ProductsDetails() {
                             }}
                           >
                             <ul>
-                              <li>Large Capacity. </li>
-                              <li>
-                                Come with a hand carry strap and adjustable
-                                shoulder strap{" "}
-                              </li>
-                              <li>
-                                Wide & thick ,comfortable for heavy carry{" "}
-                              </li>
-                              <li>With adjustable chest belt </li>
-                              <li>Waterproof </li>
-                              <li>Size 14/15.6 </li>
+                      <li className="">
+                    {prouductsDetails.description}
+
+                      </li>
                             </ul>
                           </td>
                         </tr>
@@ -460,7 +451,7 @@ export default function ProductsDetails() {
                   &nbsp;&nbsp;&nbsp;
                   <div className="col-lg-5">
                     <table
-                      className="w-100  h-100"
+                      className="w-100 h-auto"
                       style={{ border: "1px solid rgb(156, 152, 152)" }}
                     >
                       <thead>
@@ -484,12 +475,7 @@ export default function ProductsDetails() {
                             }}
                           >
                             <ul>
-                              <li>
-                                <strong>SKU:</strong> GE810EA1CYXWCNA
-                              </li>
-                              <li>
-                                <strong>Model:</strong> Mein-01-Black
-                              </li>
+                            
                               <li>
                                 <strong>Production Country</strong>Malaysia
                               </li>
@@ -499,12 +485,8 @@ export default function ProductsDetails() {
                               <li>
                                 <strong>Color</strong> {prouductsDetails.colors}
                               </li>
-                              <li>
-                                <strong>Main Material:</strong>Waterproof{" "}
-                              </li>
-                              <li className=" list-unstyled font1 pt-5">
-                                ....
-                              </li>
+                              
+                            
                             </ul>
                           </td>
                         </tr>
@@ -533,21 +515,15 @@ export default function ProductsDetails() {
                     </h6>
                   </div>
                   <div className="m-2">
-                    <button
-                      onClick={() => {
-                        addProduct(id);
-                      }}
-                      className="bg-orange form-control w-100 py-2"
-                    >
-                      <a
-                        className="text-white fw-bold text-decoration-none"
-                        href=""
+                  <button
+                        className="btn w-100 text-light"
+                        style={{ background: "#E07E1B" }}
+                        onClick={() => {
+                          addProduct(id);
+                        }}
                       >
-                        {" "}
-                        <i className="fa-solid fa-cart-plus px-2"></i> ADD TO
-                        CART{" "}
-                      </a>
-                    </button>
+                        Add to Cart
+                      </button>
                   </div>
 
                   <div className="w-100 pt-3">
@@ -632,9 +608,9 @@ export default function ProductsDetails() {
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
+                        <i class="fa-solid fa-star star-icon  star-edit "></i>
                       </div>
-                      <p className="text-center">
+                      {/* <p className="text-center">
                         {prouductsDetails.ratingCount > 0 ? (
                           <span>
                             verified ratings {prouductsDetails.ratingCount}
@@ -642,7 +618,7 @@ export default function ProductsDetails() {
                         ) : (
                           " no rating yet"
                         )}{" "}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   <div className="col-md-9">
@@ -677,16 +653,13 @@ export default function ProductsDetails() {
                               </div>
                             </div>
                             <div className="d-flex justify-content-between">
-                              <p className=" text-success">
-                                <i class="fa-solid fa-circle-check"></i>
-                                Verified Purchase
-                              </p>
+                            
                             </div>
                           </div>
                         );
                       })
                     ) : (
-                      <p> no reviews for this product</p>
+                      <p> </p>
                     )}
                     <div className="text-danger">
                       {errMessage ? errMessage : ""}
@@ -702,6 +675,7 @@ export default function ProductsDetails() {
           <i className="fa-solid fa-spinner fa-spin fa-7x"></i>
         </div>
       )}
+      <br />
     </>
   );
 }
