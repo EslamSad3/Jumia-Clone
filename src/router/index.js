@@ -15,7 +15,11 @@ import PrivateRoute from "./guard";
 import TestCart from "../pages/testcart/TestCart";
 import Checkout from "../pages/checkout/Checkout";
 import Orders from "../pages/orders/Orders";
-import SellerSignUp from "../components/sellersignUp/sellerSignUp.jsx"
+import SellerSignUp from "../components/sellersignUp/sellerSignUp.jsx";
+import AllProducts from "../components/allProducts/AllProducts";
+import Add from "../components/actions/Add";
+import Update from "../components/actions/Update";
+import Sellerlogin from "../components/login/Login";
 
 function index({ userData, saveUserData }) {
   return (
@@ -29,18 +33,32 @@ function index({ userData, saveUserData }) {
             element={<ProductsDetails userData={userData} />}
           />
           <Route path="/cart" element={<TestCart />} />
-          <Route path="/sellersignup" element={<SellerSignUp />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<Orders />} />
+
+          {/* seller */}
+
+          <Route path="/seller" element={<AllProducts />}  userData={userData}  />
+          <Route path="/selleraddproducts" element={<Add />} />
+          <Route path="/selleraupdateproducts/:id" element={<Update />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="/products" element={<Products />} />
+
         <Route
           path="/signin"
           element={
             <PrivateRoute>
               {" "}
               <Login saveUserData={saveUserData} />{" "}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/sellerlogin"
+          element={
+            <PrivateRoute>
+              <Sellerlogin userData={userData}  />
             </PrivateRoute>
           }
         />
@@ -53,6 +71,15 @@ function index({ userData, saveUserData }) {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/sellersignup"
+          element={
+            <PrivateRoute>
+              <SellerSignUp />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/forgetpassword"
           element={

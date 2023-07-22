@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./Products.css";
 import ProductsSideBar from "./ProductsSideBar";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Banner from "../shared/Banner/Banner";
 import Footer from "../shared/Footer/Footer";
 import PaginationComponent from "../Pagination/Pagination";
 function Products() {
+  const navigate = useNavigate();
   const [rangePrice, setrangePrice] = useState([1, 20000]);
   function listFun(argu) {
     setrangePrice(argu);
@@ -34,6 +35,9 @@ function Products() {
       });
   }, [page, rangePrice]);
 
+  const goHome = () => {
+    navigate("/");
+  };
   const handleChange = (e) => {
     setSearchField(e.target.value);
   };
@@ -44,8 +48,15 @@ function Products() {
   return (
     <>
       <Banner />
-      <div className="row mx-0 justify-content-evenly">
+      <div className="row mx-0 my-3 justify-content-evenly">
         <div className="input-group">
+          <button
+            onClick={goHome}
+            className="btn rounded-1 search-btn fw-bold d-none d-md-block d-lg-block d-xl-block text-white my-2 mx-3 my-sm-0 text-uppercase px-"
+            type="button"
+          >
+            Home
+          </button>
           <input
             type="text"
             className="form-control rounded-1 "
@@ -53,12 +64,6 @@ function Products() {
             placeholder="Search products"
             onChange={handleChange}
           />
-          <button
-            className="btn rounded-1 search-btn fw-bold d-none d-md-block d-lg-block d-xl-block text-white my-2 mx-2 my-sm-0 text-uppercase px-3"
-            type="button"
-          >
-            search
-          </button>
         </div>
         <div className="col-2 d-none d-md-block d-lg-block d-xl-block">
           <ProductsSideBar listFun={listFun} />
