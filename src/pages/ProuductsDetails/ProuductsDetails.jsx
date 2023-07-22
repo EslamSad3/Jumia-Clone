@@ -607,7 +607,7 @@ export default function ProductsDetails() {
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
+                        <i class="fa-solid fa-star star-icon star-edit"></i>
                         <i class="fa-solid fa-star star-icon  star-edit "></i>
                       </div>
                       {/* <p className="text-center">
