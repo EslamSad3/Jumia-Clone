@@ -15,6 +15,7 @@ import PrivateRoute from "./guard";
 import TestCart from "../pages/testcart/TestCart";
 import Checkout from "../pages/checkout/Checkout";
 import Orders from "../pages/orders/Orders";
+import SellerSignUp from "../components/sellersignUp/sellerSignUp.jsx"
 
 function index({ userData, saveUserData }) {
   return (
@@ -28,6 +29,7 @@ function index({ userData, saveUserData }) {
             element={<ProductsDetails userData={userData} />}
           />
           <Route path="/cart" element={<TestCart />} />
+          <Route path="/sellersignup" element={<SellerSignUp />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="*" element={<NotFound />} />

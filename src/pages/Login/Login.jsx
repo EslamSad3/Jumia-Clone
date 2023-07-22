@@ -196,6 +196,11 @@ return (
              Don't have an account? Sign up here
       </a>
     </div>
+    <div className="text-center mt-4">
+      <a href="/sellersignup" className="mb-5 fw-bold" style={{ color: "#f8972d" }}>
+             You're a seller? Sign up as a seller here
+      </a>
+    </div>
   </>
 );
 };
