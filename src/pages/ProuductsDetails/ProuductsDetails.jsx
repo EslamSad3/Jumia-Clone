@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 
 export default function ProductsDetails() {
   const navigate = useNavigate();
+  const [averageRatings, setaverageRatings] = useState(0)
 
   let { addToCart, setnumOfCartItems } = useContext(cartContext);
 
@@ -77,14 +78,24 @@ export default function ProductsDetails() {
         `https://ali-service-ey1c.onrender.com/api/team2/products/${id}`
       );
 
-      // console.log(data);
+      console.log(data);
       setprouductsDetails(data);
       setReviews(data.reviews);
+      const ratingAvera = data.reviews.map((rev) => rev.ratingAverage)
+      const all = ratingAvera.reduce((acc, rev) => acc + rev, 0)
+      const res = all / ratingAvera.length;
+      if (res) {
+        setaverageRatings(res)
+      }
+      else setaverageRatings(0)
       // console.log(Reviews);
     } catch (error) {
       console.log("error:", error);
     }
   }
+
+
+
 
   function newreview(values) {
     axios
@@ -97,7 +108,7 @@ export default function ProductsDetails() {
           },
         }
 
-              )
+      )
       .then((res) => {
         getproductDetails();
       })
@@ -113,7 +124,7 @@ export default function ProductsDetails() {
     title: "",
     user: "",
     product: id,
-    ratings: "",
+    ratingAverage: 0,
   };
 
   const validationSchema = Yup.object({
@@ -121,7 +132,7 @@ export default function ProductsDetails() {
       .required("review is required")
       .min(3, "review minLength is 3")
       .max(50, "review maxLength is 50"),
-    ratings: Yup.number()
+    ratingAverage: Yup.number()
       .required("rating is required")
       .min(1, "rating minLength is 1")
       .max(5, "rating maxLength is 5"),
@@ -135,7 +146,8 @@ export default function ProductsDetails() {
 
   useEffect(function () {
     getproductDetails();
-  }, []);
+
+  }, [Reviews]);
 
   return (
     <>
@@ -175,7 +187,7 @@ export default function ProductsDetails() {
                           className=" text-decoration-none text-warning"
                         >
                           <i class="fa-solid fa-star star-icon"></i>(
-                          {prouductsDetails.averageRating})
+                          {averageRatings})
                         </a>
                       </span>{" "}
                     </span>
@@ -257,7 +269,7 @@ export default function ProductsDetails() {
                         {" "}
                         Giza
                       </option>
-                   
+
                     </select>
                   </label>
 
@@ -267,7 +279,7 @@ export default function ProductsDetails() {
                         {" "}
                         6th of october
                       </option>
-                  
+
                     </select>
                   </label>
                 </div>
@@ -438,10 +450,10 @@ export default function ProductsDetails() {
                             }}
                           >
                             <ul>
-                      <li className="">
-                    {prouductsDetails.description}
+                              <li className="">
+                                {prouductsDetails.description}
 
-                      </li>
+                              </li>
                             </ul>
                           </td>
                         </tr>
@@ -475,7 +487,7 @@ export default function ProductsDetails() {
                             }}
                           >
                             <ul>
-                            
+
                               <li>
                                 <strong>Production Country</strong>Malaysia
                               </li>
@@ -485,8 +497,8 @@ export default function ProductsDetails() {
                               <li>
                                 <strong>Color</strong> {prouductsDetails.colors}
                               </li>
-                              
-                            
+
+
                             </ul>
                           </td>
                         </tr>
@@ -515,15 +527,15 @@ export default function ProductsDetails() {
                     </h6>
                   </div>
                   <div className="m-2">
-                  <button
-                        className="btn w-100 text-light"
-                        style={{ background: "#E07E1B" }}
-                        onClick={() => {
-                          addProduct(id);
-                        }}
-                      >
-                        Add to Cart
-                      </button>
+                    <button
+                      className="btn w-100 text-light"
+                      style={{ background: "#E07E1B" }}
+                      onClick={() => {
+                        addProduct(id);
+                      }}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
 
                   <div className="w-100 pt-3">
@@ -571,19 +583,19 @@ export default function ProductsDetails() {
                     </div>
                   ) : null}
 
-                  <label htmlFor="ratings">Rating </label>
+                  <label htmlFor="ratingAverage">Rating </label>
                   <input
-                    id="ratings"
+                    id="ratingAverage"
                     onChange={myformik.handleChange}
                     onBlur={myformik.handleBlur}
-                    value={myformik.values.ratings}
+                    value={myformik.values.ratingAverage}
                     type="number"
                     className="form-control my-1"
                     placeholder="rate proudct"
                   />
-                  {myformik.errors.ratings && myformik.touched.ratings ? (
+                  {myformik.errors.ratingAverage && myformik.touched.ratingAverage ? (
                     <div className="alert alert-danger w-25">
-                      {myformik.errors.ratings}
+                      {myformik.errors.ratingAverage}
                     </div>
                   ) : null}
 
@@ -601,15 +613,15 @@ export default function ProductsDetails() {
                     <p className="fw-semibold">VERIFIED RATINGS </p>
                     <div className="container  bg-light">
                       <h1 className="text-center text-warning">
-                        <span>{prouductsDetails.averageRating}</span>/5
+                        <span>{averageRatings}</span>/5
                       </h1>
-                      <div className="text-center">
+                      {/* <div className="text-center">
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon star-edit"></i>
                         <i class="fa-solid fa-star star-icon  star-edit "></i>
-                      </div>
+                      </div> */}
                       {/* <p className="text-center">
                         {prouductsDetails.ratingCount > 0 ? (
                           <span>
@@ -634,7 +646,11 @@ export default function ProductsDetails() {
                         return (
                           <div key={idx}>
                             <div>
-                              <p className="fw-bold pt-2">{rev.user.name}</p>
+                              <div className="d-flex justify-content-between w-50">
+                                <p className="fw-bold pt-2">{rev.user.name}</p>
+                                <p className="my-1 text-dark"> {rev.ratingAverage} <i class="fa-solid fa-star star-icon"></i></p>
+
+                              </div>
                               <div className="d-flex justify-content-between w-50">
                                 <p className="my-1"> {rev.title}</p>
 
@@ -653,7 +669,7 @@ export default function ProductsDetails() {
                               </div>
                             </div>
                             <div className="d-flex justify-content-between">
-                            
+
                             </div>
                           </div>
                         );
