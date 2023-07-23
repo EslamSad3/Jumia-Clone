@@ -80,11 +80,7 @@ function index({ userData, saveUserData }) {
         />
         <Route
           path="/sellerlogin"
-          element={
-            
-              <Sellerlogin userData={userData} />
-            
-          }
+          element={<Sellerlogin userData={userData} />}
         />
         <Route
           path="/signup"
