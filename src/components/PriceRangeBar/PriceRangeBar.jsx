@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const PriceRangeBar = ({ listFun }) => {
     const [minValue, setMinValue] = useState(1);
-    const [maxValue, setMaxValue] = useState(20000);
+    const [maxValue, setMaxValue] = useState(60000);
     const [finaValue, setFinalValue] = useState([minValue, maxValue]);
     async function productfilter(e) {
 
@@ -36,8 +36,8 @@ const PriceRangeBar = ({ listFun }) => {
                 className="horizontal-slider"
                 thumbClassName="example-thumb"
                 trackClassName="example-track"
-                defaultValue={[1, 20000]}
-                max={20000}
+                defaultValue={[1, 60000]}
+                max={60000}
                 min={1}
                 value={[minValue, maxValue]}
                 // ariaLabel={["Lower thumb", "Upper thumb"]}
@@ -76,10 +76,10 @@ const PriceRangeBar = ({ listFun }) => {
                     type="number"
                     placeholder="Max"
                     min="101"
-                    max="20000"
+                    max="60000"
                     onBlur={(e) => {
                         if (!e.target.value) {
-                            setMaxValue(20000);
+                            setMaxValue(60000);
                         }
                     }}
                     onChange={(e) => {

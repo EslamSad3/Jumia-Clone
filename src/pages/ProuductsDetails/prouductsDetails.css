@@ -44,3 +44,7 @@
     .font1{
       font-size: 1px;
     }
+
+    .star-edit{
+      color: rgba(255, 166, 0, 0.26) !important;
+    }
