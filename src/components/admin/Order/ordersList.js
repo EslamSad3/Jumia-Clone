@@ -107,7 +107,7 @@ function OrdersOrdersList() {
             <th>Email</th>
             <th>Payment method</th>
             <th>Total price</th>
-            <th>Actions</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -118,10 +118,11 @@ function OrdersOrdersList() {
               <td>{user.user.email}</td>
               <td>{user.paymentMethodType}</td>
               <td>{user.totalOrderPrice}</td>
+              {/* <td>{user.cartItems}</td> */}
               <td>
-                <Button variant="warning" onClick={() => handleEdit(user._id)}>
+                {/* <Button variant="warning" onClick={() => handleEdit(user._id)}>
                   Edit
-                </Button>{' '}
+                </Button>{' '} */}
                 <ConfirmDeleteModal id={user._id} handleDelete={handleDelete} user={user} />
               </td>
             </tr>

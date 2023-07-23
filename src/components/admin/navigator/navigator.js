@@ -21,8 +21,8 @@ function Navigator() {
         <Nav className="mr-auto">
          
           <Nav.Link href="/userslist">Users List</Nav.Link>
-          <Nav.Link href="/productsList">Products List</Nav.Link>
-          <Nav.Link href="/ordersList">Orders List</Nav.Link>
+          <Nav.Link href="/productslist">Products List</Nav.Link>
+          <Nav.Link href="/orderslist">Orders List</Nav.Link>
           {isLoggedIn ? (
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           ) : (
