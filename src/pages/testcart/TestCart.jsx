@@ -107,8 +107,8 @@ export default function TestCart() {
                     <img src={item.imageCover} alt="" className="w-100" />
                   </div>
                   <div className="col-md-11 d-flex justify-content-between">
-                    <div>
-                      <h6>{item.name}</h6>
+                    <div className="w-100">
+                      <h6 className="">{item.name}</h6>
                       <h6 className="text-danger">price: {item.price}</h6>
                       <button
                         onClick={() => {
@@ -119,7 +119,7 @@ export default function TestCart() {
                         <i className="fa-regular fa-trash-can"></i> remove
                       </button>
                     </div>
-                    <div>
+                    <div className="w-100">
                       <button
                         onClick={() => {
                           updateQuantity(item._id, item.quantity + 1);
@@ -128,7 +128,7 @@ export default function TestCart() {
                       >
                         +
                       </button>
-                      <span className="mx-3">{item.quantity}</span>
+                      <span className="mx-2">{item.quantity}</span>
                       <button
                         onClick={() => {
                           decrease(item._id, item.quantity);

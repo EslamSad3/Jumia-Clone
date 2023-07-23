@@ -83,9 +83,9 @@ export default function ProductsDetails() {
       setReviews(data.reviews);
       const ratingAvera = data.reviews.map((rev) => rev.ratingAverage)
       const all = ratingAvera.reduce((acc, rev) => acc + rev, 0)
-      const res = all / ratingAvera.length;
+      const res = (all / ratingAvera.length);
       if (res) {
-        setaverageRatings(res)
+        setaverageRatings(res.toFixed(1))
       }
       else setaverageRatings(0)
       // console.log(Reviews);
