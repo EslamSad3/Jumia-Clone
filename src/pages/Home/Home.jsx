@@ -51,14 +51,14 @@ export default function Home() {
     const [cat, setCat] = useState([])
     const [products, setproducts] = useState([])
     useEffect(() => {
-        axios.get("https://jumia-clone-api-9qqm.onrender.com/api/team2/categories?limit=12").then(res => {
+        axios.get("https://ali-service-ey1c.onrender.com/api/team2/categories?limit=12").then(res => {
             const data = res.data.data
             setCat(data)
         })
     }, [])
 
     useEffect(() => {
-        axios.get("https://jumia-clone-api-9qqm.onrender.com/api/team2/products?limit=3").then(res => {
+        axios.get("https://ali-service-ey1c.onrender.com/api/team2/products?limit=3").then(res => {
             // console.log(res.data.Products);    
             const prodata = res.data.Products
             // console.log(prodata);

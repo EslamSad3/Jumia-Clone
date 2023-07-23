@@ -9,7 +9,7 @@ export default function FlashSalCountDown() {
 
 
     useEffect(() => {
-        axios.get("https://jumia-clone-api-9qqm.onrender.com/api/team2/products").then(res => {
+        axios.get("https://ali-service-ey1c.onrender.com/api/team2/products").then(res => {
             // console.log(res.data.Products);    
             const allproducts = res.data.Products
             // console.log(allproducts);
