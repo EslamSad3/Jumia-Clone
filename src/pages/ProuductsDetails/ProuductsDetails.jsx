@@ -613,7 +613,7 @@ export default function ProductsDetails() {
                     <p className="fw-semibold">VERIFIED RATINGS </p>
                     <div className="container  bg-light">
                       <h1 className="text-center text-warning">
-                        <span>{averageRatings}</span>/5
+                        {averageRatings.length>0? <span>{averageRatings}/5</span>  : <h6 className="text-start" >"no rating yet"</h6>}
                       </h1>
                       {/* <div className="text-center">
                         <i class="fa-solid fa-star star-icon"></i>
@@ -675,7 +675,7 @@ export default function ProductsDetails() {
                         );
                       })
                     ) : (
-                      <p> </p>
+                      <p className="text-warning h6 fw-semibold"> No feedback yet on this Product</p>
                     )}
                     <div className="text-danger">
                       {errMessage ? errMessage : ""}
