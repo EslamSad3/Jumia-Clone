@@ -15,14 +15,14 @@ export default function BackToUpBtn() {
     }
     return <>
         {backToTopBtn && (
-            <button className='btn rounded-5' style={{
+            <button className='btn rounded-5 d-flex justify-content-center align-items-center   bg-danger ' style={{
                 position: "fixed",
                 bottom: "50px",
                 right: "50px",
-                height: "50px",
-                width: "50px",
+                height: "40px",
+                width: "20px",
                 fontSize: "1.1rem"
-            }} onClick={() => scrollUp()}><i className='fa fa-arrow-alt-circle-up'></i> </button>
+            }} onClick={() => scrollUp()}><i className='fa fa-arrow-alt-circle-up '></i> </button>
         )}
     </>
 }

@@ -20,6 +20,7 @@ import AllProducts from "../components/allProducts/AllProducts";
 import Add from "../components/actions/Add";
 import Update from "../components/actions/Update";
 import Sellerlogin from "../components/login/Login";
+import ProtectedRoute from "../components/protectedRoute/ProtectedRoute";
 
 function index({ userData, saveUserData }) {
   return (
@@ -38,9 +39,32 @@ function index({ userData, saveUserData }) {
 
           {/* seller */}
 
-          <Route path="/seller" element={<AllProducts />}  userData={userData}  />
-          <Route path="/selleraddproducts" element={<Add />} />
-          <Route path="/selleraupdateproducts/:id" element={<Update />} />
+          <Route
+            path="/seller"
+            element={
+              <ProtectedRoute>
+                <AllProducts />
+              </ProtectedRoute>
+            }
+            userData={userData}
+          />
+          <Route
+            path="/selleraddproducts"
+            element={
+              <ProtectedRoute>
+                <Add />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/selleraupdateproducts/:id"
+            element={
+              <ProtectedRoute>
+                {" "}
+                <Update />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="/products" element={<Products />} />
@@ -57,9 +81,9 @@ function index({ userData, saveUserData }) {
         <Route
           path="/sellerlogin"
           element={
-            <PrivateRoute>
-              <Sellerlogin userData={userData}  />
-            </PrivateRoute>
+            
+              <Sellerlogin userData={userData} />
+            
           }
         />
         <Route
