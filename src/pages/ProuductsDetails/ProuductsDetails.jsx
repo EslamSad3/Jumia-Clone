@@ -202,7 +202,7 @@ export default function ProductsDetails() {
                     </h6>
                     <p className="p-color mb-0">Few units left</p>
                     <p className="font12">
-                      + shipping from EGP 10.83 to 6th of October
+                      + shipping from EGP 10.82 to 6th of October
                     </p>
                     <div class=" mt-3 py-2">
                       <button
