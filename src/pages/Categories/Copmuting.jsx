@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default function Copmuting() {
     const [subCategories, setSubs] = useState([]);
-    const [rangePrice, setrangePrice] = useState([1, 20000])
+    const [rangePrice, setrangePrice] = useState([1, 60000])
     const [brandsComputing, setBrandsComputing] = useState([]);
     function listFun(argu) {
         setrangePrice(argu)
