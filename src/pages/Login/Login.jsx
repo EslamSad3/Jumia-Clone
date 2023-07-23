@@ -260,6 +260,7 @@ async function handleLogin(values, {setFieldError}) {
         if (error.response.status === 401) {
        setFieldError("email", "Incorrect email or password");
        setFieldError("password", "Incorrect email or password");
+       setIsLoading(false)
       }
 
  }
