@@ -183,11 +183,11 @@ export default function ProductsDetails() {
                       <span>
                         &nbsp;&nbsp;
                         <a
-                          href=""
+                          
                           className=" text-decoration-none text-warning"
                         >
-                          <i class="fa-solid fa-star star-icon"></i>(
-                          {averageRatings})
+                          <i class="fa-solid fa-star star-icon"></i>
+                            {averageRatings? <span> {averageRatings}</span>  : <span className="text-start" > No rating yet</span>} 
                         </a>
                       </span>{" "}
                     </span>
@@ -613,7 +613,7 @@ export default function ProductsDetails() {
                     <p className="fw-semibold">VERIFIED RATINGS </p>
                     <div className="container  bg-light">
                       <h1 className="text-center text-warning">
-                        {averageRatings.length>0? <span>{averageRatings}/5</span>  : <h6 className="text-start" >"no rating yet"</h6>}
+                        {averageRatings? <span>{averageRatings}/5</span>  : <h6 className="text-start" >"no rating yet"</h6>}
                       </h1>
                       {/* <div className="text-center">
                         <i class="fa-solid fa-star star-icon"></i>
