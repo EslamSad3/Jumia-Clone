@@ -384,6 +384,7 @@ function Registration() {
     } catch (error) {
       if (error.response.status === 400) {
         setFieldError("email", "Email already in use");
+        setIsLoading(false)
       }
     }
   }
