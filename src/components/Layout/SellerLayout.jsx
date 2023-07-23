@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
-
+import SideBar from '../sidebar/SideBar';
 
 import React from 'react'
 
-function SellerLayout() {
+function SellerLayout({userData}) {
     return <>
 
-    <Navigator userData={userData} />
+    <SideBar userData={userData} />
     <ToastContainer />
     <Outlet >
    </Outlet >
