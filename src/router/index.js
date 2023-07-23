@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
+
 import Home from "../pages/Home/Home";
 import Copmuting from "../pages/Categories/Copmuting";
 import ProductsDetails from "../pages/ProuductsDetails/ProuductsDetails";
@@ -11,7 +12,6 @@ import Registraion from "../pages/Registraion/Registraion";
 import Identification from "../pages/Identification/Identification";
 import NotFound from "../pages/NotFound/NotFound";
 import Products from "../components/Products/Products";
-import PrivateRoute from "./guard";
 import TestCart from "../pages/testcart/TestCart";
 import Checkout from "../pages/checkout/Checkout";
 import Orders from "../pages/orders/Orders";
@@ -19,8 +19,19 @@ import SellerSignUp from "../components/sellersignUp/sellerSignUp.jsx";
 import AllProducts from "../components/allProducts/AllProducts";
 import Add from "../components/actions/Add";
 import Update from "../components/actions/Update";
-import Sellerlogin from "../components/login/Login";
 import ProtectedRoute from "../components/protectedRoute/ProtectedRoute";
+import PrivateRoute from "./guard";
+import PrivateRouteT from "./guard2";
+import UsersList from "../components/admin/User/Userslist"
+import AddUser from "../components/admin/User/addUser"
+import EditUser from "../components/admin/User/editUser"
+import ProductList from "../components/admin/Product/ProductsList"
+import AddProduct from "../components/admin/Product/addProduct"
+import EditProduct from "../components/admin/Product/editProduct"
+import OrdersList from "../components/admin/Order/ordersList"
+import Welcome from "../components/admin/welcome"
+import AdminLayout from "../components/Layout/AdminLayout";
+import SellerLayout from "../components/Layout/SellerLayout";
 
 function index({ userData, saveUserData }) {
   return (
@@ -29,46 +40,12 @@ function index({ userData, saveUserData }) {
         <Route element={<Layout userData={userData} />}>
           <Route path="/" element={<Home />} />
           <Route path="/copmuting" element={<Copmuting />} />
-          <Route
-            path="/productdetails/:id"
-            element={<ProductsDetails userData={userData} />}
-          />
+          <Route path="/productdetails/:id" element={<ProductsDetails userData={userData} />} />
           <Route path="/cart" element={<TestCart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<Orders />} />
-
-          {/* seller */}
-
-          <Route
-            path="/seller"
-            element={
-              <ProtectedRoute>
-                <AllProducts />
-              </ProtectedRoute>
-            }
-            userData={userData}
-          />
-          <Route
-            path="/selleraddproducts"
-            element={
-              <ProtectedRoute>
-                <Add />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/selleraupdateproducts/:id"
-            element={
-              <ProtectedRoute>
-                {" "}
-                <Update />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Route>
+         </Route>
         <Route path="/products" element={<Products />} />
-
         <Route
           path="/signin"
           element={
@@ -78,10 +55,7 @@ function index({ userData, saveUserData }) {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/sellerlogin"
-          element={<Sellerlogin userData={userData} />}
-        />
+
         <Route
           path="/signup"
           element={
@@ -117,6 +91,113 @@ function index({ userData, saveUserData }) {
           }
         />
       </Routes>
+      <Routes>
+      {/* admin */}
+      <Route element={<AdminLayout userData={userData} />}>
+      <Route
+        path="/admin"
+        element={
+          <PrivateRoute>
+            <Welcome />
+          </PrivateRoute>
+        }
+      />
+      {/* <Route path="/adminWelcome"  element={<PrivateRoute><Welcome /> </PrivateRoute>} /> */}
+      {/* <Route path="/signIn" element={<Signin />} /> */}
+      <Route
+        path="/userslist"
+        element={
+          <PrivateRouteT>
+            {" "}
+            <UsersList />{" "}
+          </PrivateRouteT>
+        }
+      />
+      <Route
+        path="/edituser/:id"
+        element={
+          <PrivateRouteT>
+            <EditUser />{" "}
+          </PrivateRouteT>
+        }
+      />
+      <Route
+        path="/adduser"
+        element={
+          <PrivateRouteT>
+            <AddUser />
+          </PrivateRouteT>
+        }
+      />
+      <Route
+        path="/addproduct"
+        element={
+          <PrivateRouteT>
+            <AddProduct />
+          </PrivateRouteT>
+        }
+      />
+      <Route
+        path="/productslist"
+        element={
+          <PrivateRouteT>
+            <ProductList />
+          </PrivateRouteT>
+        }
+      />
+      <Route
+        path="/editproduct/:id"
+        element={
+          <PrivateRouteT>
+            <EditProduct />
+          </PrivateRouteT>
+        }
+      />
+      <Route
+        path="/ordersList"
+        element={
+          <PrivateRouteT>
+            <OrdersList />
+          </PrivateRouteT>
+        }
+      />
+</Route>
+      {/* admin */}
+      </Routes>
+      <Routes>
+
+    {/* seller */}
+     <Route element={<SellerLayout userData={userData} />}>
+      <Route
+        path="/seller"
+        element={
+          <ProtectedRoute>
+            <AllProducts />
+          </ProtectedRoute>
+        }
+        userData={userData}
+      />
+      <Route
+        path="/selleraddproducts"
+        element={
+          <ProtectedRoute>
+            <Add />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/selleraupdateproducts/:id"
+        element={
+          <ProtectedRoute>
+            {" "}
+            <Update />
+          </ProtectedRoute>
+        }
+      />
+      {/* seller */}
+      </Route>
+      </Routes>
+    
     </Fragment>
   );
 }
