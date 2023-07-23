@@ -179,15 +179,15 @@ export default function ProductsDetails() {
                     </span>
                     <div className="pt-2"></div>
                     <span className="fw-bold ">
-                      averageRating
+                      Rating
                       <span>
                         &nbsp;&nbsp;
                         <a
-                          href=""
+                          
                           className=" text-decoration-none text-warning"
                         >
-                          <i class="fa-solid fa-star star-icon"></i>(
-                          {averageRatings})
+                          <i class="fa-solid fa-star star-icon"></i>
+                            {averageRatings? <span> {averageRatings}</span>  : <span className="text-start" > No rating yet</span>} 
                         </a>
                       </span>{" "}
                     </span>
@@ -202,7 +202,7 @@ export default function ProductsDetails() {
                     </h6>
                     <p className="p-color mb-0">Few units left</p>
                     <p className="font12">
-                      + shipping from EGP 10.83 to 6th of October
+                      + shipping from EGP 10.82 to 6th of October
                     </p>
                     <div class=" mt-3 py-2">
                       <button
@@ -613,13 +613,13 @@ export default function ProductsDetails() {
                     <p className="fw-semibold">VERIFIED RATINGS </p>
                     <div className="container  bg-light">
                       <h1 className="text-center text-warning">
-                        <span>{averageRatings}</span>/5
+                        {averageRatings? <span>{averageRatings}/5</span>  : <h6 className="text-start" >"no rating yet"</h6>}
                       </h1>
                       {/* <div className="text-center">
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
                         <i class="fa-solid fa-star star-icon"></i>
-                        <i class="fa-solid fa-star star-icon"></i>
+                        <i class="fa-solid fa-star star-icon star-edit"></i>
                         <i class="fa-solid fa-star star-icon  star-edit "></i>
                       </div> */}
                       {/* <p className="text-center">
@@ -675,7 +675,7 @@ export default function ProductsDetails() {
                         );
                       })
                     ) : (
-                      <p> </p>
+                      <p className="text-warning h6 fw-semibold"> No feedback yet on this Product</p>
                     )}
                     <div className="text-danger">
                       {errMessage ? errMessage : ""}
